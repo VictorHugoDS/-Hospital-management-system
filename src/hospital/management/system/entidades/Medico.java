@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hospital.management.system.entidades;
 
-/**
- *
- * @author victor
- */
 public class Medico extends FuncionarioHospital{
-    int crm;
-    String especialidade;
-    String horario_plantao;
+    private int crm;
+    private String especialidade;
+    private String horario_plantao;
 
     public int getCrm() {
         return crm;
