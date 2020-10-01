@@ -1,20 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hospital.management.system.entidades;
 
-/**
- *
- * @author victor
- */
 public class Paciente {
-    String nome;
-    String cpf;
-    String endereco;
-    String telefone;
-    String convenio;
+    private String nome;
+    private String cpf;
+    private String endereco;
+    private String telefone;
+    private String convenio;
 
     public String getNome() {
         return nome;
