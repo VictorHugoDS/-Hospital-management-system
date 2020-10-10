@@ -1,18 +1,13 @@
 package hospital.management.system.entidades;
 
 public class Consulta {
-    private String relatorio;
+    private String relatorio_do_paciente;
     private String tratamento;
+    private String periodo_de_exames;
     private Medico medico;
     private Paciente paciente;
+    private Consultorio Consultorio;
 
-    public String getRelatorio() {
-        return relatorio;
-    }
-
-    public void setRelatorio(String relatorio) {
-        this.relatorio = relatorio;
-    }
 
     public String getTratamento() {
         return tratamento;

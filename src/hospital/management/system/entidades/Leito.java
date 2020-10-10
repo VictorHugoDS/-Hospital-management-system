@@ -2,8 +2,8 @@ package hospital.management.system.entidades;
 
 public class Leito {
     private int numero;
+    private String tipo;
     private Enfermeiro enfermeiro;
-    private Paciente paciente;
 
     public Enfermeiro getEnfermeiro() {
         return enfermeiro;
