@@ -1,5 +1,4 @@
 package hospital.management.system.persistencia.arquivo;
-
 import hospital.management.system.entidades.Consulta;
 import hospital.management.system.persistencia.ConsultaDAO;
 import java.io.FileInputStream;
@@ -40,9 +39,11 @@ public class ConsultaDAOImplArq implements ConsultaDAO {
         }
     }
 
+
     @Override
     public void inserir(Consulta consulta) {
         boolean existe=false;
+
         lerArquivo();
         for(int i=0;i<consultas.size();i++){
             Consulta c= consultas.get(i);
@@ -109,6 +110,7 @@ public class ConsultaDAOImplArq implements ConsultaDAO {
 
     @Override
     public List<Consulta> listar() {
+
         lerArquivo();
         return consultas;
     }
