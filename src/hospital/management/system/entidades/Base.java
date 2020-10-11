@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package hospital.management.system.entidades;
-public abstract class Base  {
+public  class Base  {
     private int id;
 
     public int getId() {
