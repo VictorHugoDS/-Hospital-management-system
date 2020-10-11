@@ -1,5 +1,6 @@
 package hospital.management.system.entidades;
 
+<<<<<<< HEAD
 public class Consulta extends Base {
     private String relatorio_do_paciente;
     private String tratamento;
@@ -7,6 +8,13 @@ public class Consulta extends Base {
     private Medico medico;
     private Paciente paciente;
     private Consultorio consultorio;
+=======
+public class Consulta {
+    private String relatorio;
+    private String tratamento;
+    private Medico medico;
+    private Paciente paciente;
+>>>>>>> 581f525e8033f6ec0893d8ee15e715a12ab530e8
 
 
     public String getTratamento() {
