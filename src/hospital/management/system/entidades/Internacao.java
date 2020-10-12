@@ -1,9 +1,11 @@
 
 package hospital.management.system.entidades;
 
+
 import java.io.Serializable;
 
 public class Internacao extends Base implements Serializable  {
+
     private String medicacao;
     private String data_de_entrada;
     private String horario_de_entrada;
