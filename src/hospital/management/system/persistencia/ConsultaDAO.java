@@ -7,7 +7,7 @@ import java.util.List;
 public interface ConsultaDAO {
     public void inserir(Consulta consulta);
     
-    public void editar(Consulta curso);
+    public void editar(Consulta consulta);
     
     public boolean remover(int id);
     
