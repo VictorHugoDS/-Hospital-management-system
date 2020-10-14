@@ -1,6 +1,6 @@
 package hospital.management.system.entidades;
 
-public class FuncionarioHospital {
+public class FuncionarioHospital extends Base {
     protected String nome;
     protected String cpf;
     protected String telefone;

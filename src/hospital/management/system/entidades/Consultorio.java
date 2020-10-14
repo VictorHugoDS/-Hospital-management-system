@@ -1,6 +1,6 @@
 package hospital.management.system.entidades;
 
-public class Consultorio {
+public class Consultorio extends Base {
     private int numero;
     private String tipo;
 
