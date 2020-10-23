@@ -6,7 +6,8 @@
 package hospital.management.system.telas;
 
 import hospital.management.system.entidades.FuncionarioHospital;
-import hospital.management.system.persistencia.arquivo.FuncionarioHospitalDAOImplArq;
+import hospital.management.system.persistencia.FuncionarioHospitalDAO;
+import hospital.management.system.utils.DAOFactory;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  * @author henri
  */
 public class JPanelFuncionarioHospital extends javax.swing.JPanel {
-    private FuncionarioHospitalDAOImplArq funcionarioDAO = new FuncionarioHospitalDAOImplArq();
+    private FuncionarioHospitalDAO funcionarioDAO = DAOFactory.createFuncionarioHospitalDAO();
     /**
      * Creates new form JPanelFuncionarioHospital
      */
