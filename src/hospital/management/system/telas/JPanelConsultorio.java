@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class JPanelConsultorio extends javax.swing.JPanel {
-    ConsultorioDAOImplArq ConsultorioDAO = new ConsultorioDAOImplArq();
+    ConsultorioDAOImplArq consultorioDAO = new ConsultorioDAOImplArq();
 
     public JPanelConsultorio() {
         initComponents();
@@ -14,7 +14,7 @@ public class JPanelConsultorio extends javax.swing.JPanel {
     }
     
     public void carregarTabela() {
-        List<Consultorio> consultorios = ConsultorioDAO.listar();
+        List<Consultorio> consultorios = consultorioDAO.listar();
         DefaultTableModel modeloTabela = (DefaultTableModel) jTable.getModel();
         //Remocao das linhas atuais da tabela para atualizacao
         int qntdLinhas = modeloTabela.getRowCount();
@@ -112,33 +112,32 @@ public class JPanelConsultorio extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelId)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonEditar)
-                            .addComponent(jButtonExcluir))
-                        .addGap(20, 20, 20)
+                            .addComponent(jButtonExcluir)
+                            .addComponent(jButtonEditar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabelId)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonSalvar)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonLimpar)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(jButtonLimpar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 200, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -147,13 +146,9 @@ public class JPanelConsultorio extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelId)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -162,14 +157,14 @@ public class JPanelConsultorio extends javax.swing.JPanel {
                     .addComponent(jButtonLimpar))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(33, 33, 33)
                         .addComponent(jButtonEditar)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonExcluir)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                         .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -184,10 +179,10 @@ public class JPanelConsultorio extends javax.swing.JPanel {
         consultorio.setId(Integer.parseInt(jTextFieldId.getText()));
         consultorio.setNumero(Integer.parseInt(jTextFieldNumero.getText()));
         consultorio.setTipo(jTextFieldTipo.getText());
-        if (ConsultorioDAO.getById(consultorio.getId()) == null) {
-            ConsultorioDAO.inserir(consultorio);
+        if (consultorioDAO.getById(consultorio.getId()) == null) {
+            consultorioDAO.inserir(consultorio);
         } else {
-            ConsultorioDAO.editar(consultorio);
+            consultorioDAO.editar(consultorio);
         }
         
         carregarTabela();
@@ -202,7 +197,7 @@ public class JPanelConsultorio extends javax.swing.JPanel {
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         int linha = jTable.getSelectedRow();
         if (linha >= 0) {
-            Consultorio consultorio = ConsultorioDAO.getById((int) jTable.getValueAt(linha, 0));
+            Consultorio consultorio = consultorioDAO.getById((int) jTable.getValueAt(linha, 0));
             jTextFieldId.setText(consultorio.getId() + "");
             jTextFieldNumero.setText(consultorio.getNumero() + "");
             jTextFieldTipo.setText(consultorio.getTipo());
@@ -212,7 +207,7 @@ public class JPanelConsultorio extends javax.swing.JPanel {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         int[] linhas = jTable.getSelectedRows();
         for (int linha: linhas) {
-            ConsultorioDAO.remover((int) jTable.getValueAt(linha,0));
+            consultorioDAO.remover((int) jTable.getValueAt(linha,0));
         }
         carregarTabela();
     }//GEN-LAST:event_jButtonExcluirActionPerformed

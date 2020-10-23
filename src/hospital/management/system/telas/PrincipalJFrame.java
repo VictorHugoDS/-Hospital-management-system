@@ -34,7 +34,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         jMenuItemFuncionarioHospital = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
@@ -75,7 +75,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
 
     private void jMenuItemFuncionarioHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFuncionarioHospitalActionPerformed
         conteudoJPanel.removeAll();
-        conteudoJPanel.add(new JPanelConsultorio());
+        conteudoJPanel.add(new JPanelFuncionarioHospital());
         conteudoJPanel.setVisible(false);
         conteudoJPanel.setVisible(true);
     }//GEN-LAST:event_jMenuItemFuncionarioHospitalActionPerformed
