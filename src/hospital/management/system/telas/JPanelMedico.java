@@ -5,8 +5,8 @@
  */
 package hospital.management.system.telas;
 
-import hospital.management.system.entidades.Enfermeiro;
-import hospital.management.system.persistencia.arquivo.EnfermeiroDAOImplArq;
+import hospital.management.system.entidades.Medico;
+import hospital.management.system.persistencia.arquivo.MedicoDAOImplArq;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,18 +14,18 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author henri
  */
-public class JPanelEnfermeiro extends javax.swing.JPanel {
-    private EnfermeiroDAOImplArq enfermeiroDAO = new EnfermeiroDAOImplArq();
+public class JPanelMedico extends javax.swing.JPanel {
+    private MedicoDAOImplArq medicoDAO = new MedicoDAOImplArq();
     /**
-     * Creates new form JPanelEnfermeiro
+     * Creates new form JPanelMedico
      */
-    public JPanelEnfermeiro() {
+    public JPanelMedico() {
         initComponents();
         carregarTabela();
     }
-
+    
     public void carregarTabela() {
-        List<Enfermeiro> enfermeiros = enfermeiroDAO.listar();
+        List<Medico> medicos = medicoDAO.listar();
         DefaultTableModel modeloTabela = (DefaultTableModel) jTable.getModel();
         int qntLinhas = modeloTabela.getRowCount();
         
@@ -34,21 +34,22 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
             modeloTabela.removeRow(0);
         }
         
-        for (Enfermeiro enfermeiro: enfermeiros) {
+        for (Medico medico: medicos) {
             Object[] linha = new Object[9];
-            linha[0] = enfermeiro.getId();
-            linha[1] = enfermeiro.getNome();
-            linha[2] = enfermeiro.getFuncao();
-            linha[3] = enfermeiro.getCpf();
-            linha[4] = enfermeiro.getSalario();
-            linha[5] = enfermeiro.getHorario();
-            linha[6] = enfermeiro.getTelefone();
-            linha[7] = enfermeiro.getHorarioPlantao();
-            linha[8] = enfermeiro.getRegistro();
+            linha[0] = medico.getId();
+            linha[1] = medico.getNome();
+            linha[2] = medico.getFuncao();
+            linha[3] = medico.getCpf();
+            linha[4] = medico.getSalario();
+            linha[5] = medico.getHorario();
+            linha[6] = medico.getTelefone();
+            linha[7] = medico.getHorarioPlantao();
+            linha[8] = medico.getCrm();
             
             modeloTabela.addRow(linha);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,20 +63,20 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
         jTextFieldNome = new javax.swing.JTextField();
         jLabelFuncao = new javax.swing.JLabel();
         jTextFieldFuncao = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelId = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelCpf = new javax.swing.JLabel();
         jTextFieldCpf = new javax.swing.JTextField();
         jLabelSalario = new javax.swing.JLabel();
         jTextFieldSalario = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelHorario = new javax.swing.JLabel();
         jTextFieldHorario = new javax.swing.JTextField();
         jLabelTelefone = new javax.swing.JLabel();
         jTextFieldTelefone = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelHorarioPlantao = new javax.swing.JLabel();
         jTextFieldHorarioPlantao = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextFieldRegistro = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldCrm = new javax.swing.JTextField();
         jButtonSalvar = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
@@ -87,9 +88,9 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
 
         jLabelFuncao.setText("Função:");
 
-        jLabel3.setText("ID:");
+        jLabelId.setText("ID:");
 
-        jLabel1.setText("CPF:");
+        jLabelCpf.setText("CPF:");
 
         jTextFieldCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,19 +100,19 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
 
         jLabelSalario.setText("Salário:");
 
-        jLabel2.setText("Horário:");
+        jLabelHorario.setText("Horário:");
 
-        jLabelTelefone.setText("Telefone:");
-
-        jLabel4.setText("Horário do Plantão:");
-
-        jTextFieldHorarioPlantao.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldHorarioPlantaoActionPerformed(evt);
+                jTextFieldHorarioActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Registro:");
+        jLabelTelefone.setText("Telefone:");
+
+        jLabelHorarioPlantao.setText("Horário do Plantão:");
+
+        jLabel1.setText("CRM:");
 
         jButtonSalvar.setText("Salvar");
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +147,7 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Nome", "Função", "CPF", "Salário", "Horário", "Telefone", "Horário do Plantão", "Registro"
+                "ID", "Nome", "Função", "CPF", "Salário", "Horário", "Telefone", "Horário do Plantão", "CRM"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -178,53 +179,53 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabelNome)
+                                        .addComponent(jLabelHorarioPlantao)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelFuncao)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldHorarioPlantao, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldHorarioPlantao, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelNome)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelFuncao)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelId)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelCpf)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabelSalario)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel2)
+                                        .addComponent(jLabelHorario)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabelTelefone)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(122, 122, 122)
+                                .addGap(129, 129, 129)
                                 .addComponent(jButtonSalvar)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonLimpar)))
-                        .addGap(0, 17, Short.MAX_VALUE)))
+                        .addGap(0, 169, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNome)
                     .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,31 +233,31 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
                     .addComponent(jTextFieldFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelId)
                     .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelCpf)
                     .addComponent(jTextFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSalario)
                     .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelHorario)
                     .addComponent(jTextFieldHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelTelefone)
                     .addComponent(jTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabelHorarioPlantao)
                     .addComponent(jTextFieldHorarioPlantao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextFieldRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvar)
                     .addComponent(jButtonLimpar))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
+                        .addGap(40, 40, 40)
                         .addComponent(jButtonEditar)
-                        .addGap(37, 37, 37)
+                        .addGap(36, 36, 36)
                         .addComponent(jButtonExcluir)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -270,27 +271,27 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCpfActionPerformed
 
-    private void jTextFieldHorarioPlantaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHorarioPlantaoActionPerformed
+    private void jTextFieldHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHorarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldHorarioPlantaoActionPerformed
+    }//GEN-LAST:event_jTextFieldHorarioActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        Enfermeiro enfermeiro = new Enfermeiro();
+        Medico medico = new Medico();
         
-        enfermeiro.setId(Integer.parseInt(jTextFieldId.getText()));
-        enfermeiro.setNome(jTextFieldNome.getText());
-        enfermeiro.setFuncao(jTextFieldFuncao.getText());
-        enfermeiro.setCpf(jTextFieldCpf.getText());
-        enfermeiro.setHorario(jTextFieldHorario.getText());
-        enfermeiro.setSalario(Double.parseDouble(jTextFieldSalario.getText()));
-        enfermeiro.setTelefone(jTextFieldTelefone.getText());
-        enfermeiro.setHorarioPlantao(jTextFieldHorarioPlantao.getText());
-        enfermeiro.setRegistro(Integer.parseInt(jTextFieldRegistro.getText()));
+        medico.setId(Integer.parseInt(jTextFieldId.getText()));
+        medico.setNome(jTextFieldNome.getText());
+        medico.setFuncao(jTextFieldFuncao.getText());
+        medico.setCpf(jTextFieldCpf.getText());
+        medico.setHorario(jTextFieldHorario.getText());
+        medico.setSalario(Double.parseDouble(jTextFieldSalario.getText()));
+        medico.setTelefone(jTextFieldTelefone.getText());
+        medico.setHorarioPlantao(jTextFieldHorarioPlantao.getText());
+        medico.setCrm(Integer.parseInt(jTextFieldCrm.getText()));
         
-        if (enfermeiroDAO.getById(enfermeiro.getId()) == null) {
-            enfermeiroDAO.inserir(enfermeiro);
+        if (medicoDAO.getById(medico.getId()) == null) {
+            medicoDAO.inserir(medico);
         } else {
-            enfermeiroDAO.editar(enfermeiro);
+            medicoDAO.editar(medico);
         }
         
         carregarTabela();
@@ -305,7 +306,7 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
         jTextFieldHorario.setText("");
         jTextFieldTelefone.setText("");
         jTextFieldHorarioPlantao.setText("");
-        jTextFieldRegistro.setText("");
+        jTextFieldCrm.setText("");
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
@@ -320,14 +321,14 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
             jTextFieldHorario.setText(jTable.getValueAt(linha, 5) + "");
             jTextFieldTelefone.setText(jTable.getValueAt(linha, 6) + "");
             jTextFieldHorarioPlantao.setText(jTable.getValueAt(linha, 7) + "");
-            jTextFieldRegistro.setText(jTable.getValueAt(linha, 8) + "");
+            jTextFieldCrm.setText(jTable.getValueAt(linha, 8) + "");
         }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         int[] linhas = jTable.getSelectedRows();
         for (int pos: linhas) {
-            enfermeiroDAO.remover((int) jTable.getValueAt(pos, 0));
+            medicoDAO.remover((int) jTable.getValueAt(pos, 0));
         }
         carregarTabela();
     }//GEN-LAST:event_jButtonExcluirActionPerformed
@@ -339,23 +340,23 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelCpf;
     private javax.swing.JLabel jLabelFuncao;
+    private javax.swing.JLabel jLabelHorario;
+    private javax.swing.JLabel jLabelHorarioPlantao;
+    private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelSalario;
     private javax.swing.JLabel jLabelTelefone;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextFieldCpf;
+    private javax.swing.JTextField jTextFieldCrm;
     private javax.swing.JTextField jTextFieldFuncao;
     private javax.swing.JTextField jTextFieldHorario;
     private javax.swing.JTextField jTextFieldHorarioPlantao;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldRegistro;
     private javax.swing.JTextField jTextFieldSalario;
     private javax.swing.JTextField jTextFieldTelefone;
     // End of variables declaration//GEN-END:variables

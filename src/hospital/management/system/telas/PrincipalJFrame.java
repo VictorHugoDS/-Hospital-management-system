@@ -32,7 +32,8 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         jMenu = new javax.swing.JMenu();
         jMenuItemConsultorio = new javax.swing.JMenuItem();
         jMenuItemFuncionarioHospital = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemEnfermeiros = new javax.swing.JMenuItem();
+        jMenuItemMedicos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -60,13 +61,21 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         });
         jMenu.add(jMenuItemFuncionarioHospital);
 
-        jMenuItem1.setText("Enfermeiros");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemEnfermeiros.setText("Enfermeiros");
+        jMenuItemEnfermeiros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemEnfermeirosActionPerformed(evt);
             }
         });
-        jMenu.add(jMenuItem1);
+        jMenu.add(jMenuItemEnfermeiros);
+
+        jMenuItemMedicos.setText("Medicos");
+        jMenuItemMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMedicosActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemMedicos);
 
         jMenuBar1.add(jMenu);
 
@@ -89,12 +98,19 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         conteudoJPanel.setVisible(true);
     }//GEN-LAST:event_jMenuItemFuncionarioHospitalActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemEnfermeirosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEnfermeirosActionPerformed
         conteudoJPanel.removeAll();
         conteudoJPanel.add(new JPanelEnfermeiro());
         conteudoJPanel.setVisible(false);
         conteudoJPanel.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemEnfermeirosActionPerformed
+
+    private void jMenuItemMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMedicosActionPerformed
+        conteudoJPanel.removeAll();
+        conteudoJPanel.add(new JPanelMedico());
+        conteudoJPanel.setVisible(false);
+        conteudoJPanel.setVisible(true);
+    }//GEN-LAST:event_jMenuItemMedicosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,8 +151,9 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel conteudoJPanel;
     private javax.swing.JMenu jMenu;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemConsultorio;
+    private javax.swing.JMenuItem jMenuItemEnfermeiros;
     private javax.swing.JMenuItem jMenuItemFuncionarioHospital;
+    private javax.swing.JMenuItem jMenuItemMedicos;
     // End of variables declaration//GEN-END:variables
 }
