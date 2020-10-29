@@ -1,12 +1,13 @@
 package hospital.management.system.telas;
 
 import hospital.management.system.entidades.Consultorio;
-import hospital.management.system.persistencia.arquivo.ConsultorioDAOImplArq;
+import hospital.management.system.persistencia.ConsultorioDAO;
+import hospital.management.system.utils.DAOFactory;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class JPanelConsultorio extends javax.swing.JPanel {
-    ConsultorioDAOImplArq consultorioDAO = new ConsultorioDAOImplArq();
+    private ConsultorioDAO consultorioDAO = DAOFactory.createConsultorioDAO();
 
     public JPanelConsultorio() {
         initComponents();
