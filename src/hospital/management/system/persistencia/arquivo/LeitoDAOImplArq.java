@@ -51,7 +51,6 @@ public class LeitoDAOImplArq implements LeitoDAO{
                 existe=true;
                 break;
             }
-            
         }
         if(!existe){
             leitos.add(leito);

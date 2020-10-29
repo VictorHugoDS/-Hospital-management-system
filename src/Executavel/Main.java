@@ -12,11 +12,5 @@ import hospital.management.system.persistencia.arquivo.LeitoDAOImplArq;
 
 public class Main {
    public static void main(String[] args) {
-      Internacao inte =new Internacao();
-      inte.setId(0);
-      inte.setData_de_entrada("Chegou bem cedo!!!");
-      InternacaoDAO banco_inte= new InternacaoDAOImplArq();
-      banco_inte.inserir(inte);
-      System.out.println(banco_inte.getById(0).getData_de_entrada());
    }
 }

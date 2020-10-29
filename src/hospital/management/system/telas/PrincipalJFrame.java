@@ -34,9 +34,10 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         jMenuItemFuncionarioHospital = new javax.swing.JMenuItem();
         jMenuItemEnfermeiros = new javax.swing.JMenuItem();
         jMenuItemMedicos = new javax.swing.JMenuItem();
+        jMenuItemLeitos = new javax.swing.JMenuItem();
+        jMenuItemInternacao = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
@@ -77,6 +78,22 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         });
         jMenu.add(jMenuItemMedicos);
 
+        jMenuItemLeitos.setText("Leitos");
+        jMenuItemLeitos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLeitosActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemLeitos);
+
+        jMenuItemInternacao.setText("Internação");
+        jMenuItemInternacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemInternacaoActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemInternacao);
+
         jMenuBar1.add(jMenu);
 
         setJMenuBar(jMenuBar1);
@@ -111,6 +128,20 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         conteudoJPanel.setVisible(false);
         conteudoJPanel.setVisible(true);
     }//GEN-LAST:event_jMenuItemMedicosActionPerformed
+
+    private void jMenuItemLeitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLeitosActionPerformed
+        conteudoJPanel.removeAll();
+        conteudoJPanel.add(new JPanelLeito());
+        conteudoJPanel.setVisible(false);
+        conteudoJPanel.setVisible(true);
+    }//GEN-LAST:event_jMenuItemLeitosActionPerformed
+
+    private void jMenuItemInternacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInternacaoActionPerformed
+        conteudoJPanel.removeAll();
+        conteudoJPanel.add(new JPanelInternacao());
+        conteudoJPanel.setVisible(false);
+        conteudoJPanel.setVisible(true);
+    }//GEN-LAST:event_jMenuItemInternacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +185,8 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemConsultorio;
     private javax.swing.JMenuItem jMenuItemEnfermeiros;
     private javax.swing.JMenuItem jMenuItemFuncionarioHospital;
+    private javax.swing.JMenuItem jMenuItemInternacao;
+    private javax.swing.JMenuItem jMenuItemLeitos;
     private javax.swing.JMenuItem jMenuItemMedicos;
     // End of variables declaration//GEN-END:variables
 }
