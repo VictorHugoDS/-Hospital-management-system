@@ -36,8 +36,10 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         jMenuItemMedicos = new javax.swing.JMenuItem();
         jMenuItemLeitos = new javax.swing.JMenuItem();
         jMenuItemInternacao = new javax.swing.JMenuItem();
+        jMenuItemConsulta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
@@ -94,6 +96,14 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         });
         jMenu.add(jMenuItemInternacao);
 
+        jMenuItemConsulta.setText("Consulta");
+        jMenuItemConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConsultaActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemConsulta);
+
         jMenuBar1.add(jMenu);
 
         setJMenuBar(jMenuBar1);
@@ -143,6 +153,13 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         conteudoJPanel.setVisible(true);
     }//GEN-LAST:event_jMenuItemInternacaoActionPerformed
 
+    private void jMenuItemConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConsultaActionPerformed
+       conteudoJPanel.removeAll();
+        conteudoJPanel.add(new JPanelConsulta());
+        conteudoJPanel.setVisible(false);
+        conteudoJPanel.setVisible(true);
+    }//GEN-LAST:event_jMenuItemConsultaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -182,6 +199,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel conteudoJPanel;
     private javax.swing.JMenu jMenu;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemConsulta;
     private javax.swing.JMenuItem jMenuItemConsultorio;
     private javax.swing.JMenuItem jMenuItemEnfermeiros;
     private javax.swing.JMenuItem jMenuItemFuncionarioHospital;
