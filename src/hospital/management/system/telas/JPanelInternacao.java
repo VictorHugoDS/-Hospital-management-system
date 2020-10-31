@@ -65,7 +65,6 @@ public class JPanelInternacao extends javax.swing.JPanel {
         jTextFieldData_de_entrada = new javax.swing.JTextField();
         jTextFieldHorario_de_entrada = new javax.swing.JTextField();
         jTextFieldData_de_saida = new javax.swing.JTextField();
-        jTextFieldHorario_de_saida = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaMedicacao = new javax.swing.JTextArea();
         jButtonSalvar = new javax.swing.JButton();
@@ -74,6 +73,7 @@ public class JPanelInternacao extends javax.swing.JPanel {
         jTable = new javax.swing.JTable();
         jButtonEditar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
+        jTextFieldHorario_de_saida = new javax.swing.JTextField();
 
         jLabelId.setText("Id:");
 
@@ -102,12 +102,6 @@ public class JPanelInternacao extends javax.swing.JPanel {
         jTextFieldData_de_saida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldData_de_saidaActionPerformed(evt);
-            }
-        });
-
-        jTextFieldHorario_de_saida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldHorario_de_saidaActionPerformed(evt);
             }
         });
 
@@ -161,6 +155,12 @@ public class JPanelInternacao extends javax.swing.JPanel {
             }
         });
 
+        jTextFieldHorario_de_saida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldHorario_de_saidaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,16 +183,16 @@ public class JPanelInternacao extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextFieldData_de_entrada, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelHorario_de_saida)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldHorario_de_saida, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelData_de_saida)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldData_de_saida, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldData_de_saida, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelHorario_de_saida)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldHorario_de_saida)))
+                        .addGap(0, 8, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelMedicacao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -262,10 +262,6 @@ public class JPanelInternacao extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldData_de_saidaActionPerformed
 
-    private void jTextFieldHorario_de_saidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHorario_de_saidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldHorario_de_saidaActionPerformed
-
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         Internacao internacao = new Internacao();
         
@@ -316,6 +312,10 @@ public class JPanelInternacao extends javax.swing.JPanel {
         }
         carregarTabela();
     }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jTextFieldHorario_de_saidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHorario_de_saidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldHorario_de_saidaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
