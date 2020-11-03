@@ -16,4 +16,7 @@ public class DAOFactory {
     public static MedicoDAO createMedicoDAO() {
         return new MedicoDAOImplArq();
     }
+    public static PacienteDAO createPacienteDAO() {
+        return new PacienteDAOImplArq();
+    }
 }
