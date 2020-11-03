@@ -2,7 +2,7 @@ package hospital.management.system.entidades;
 
 public class Enfermeiro extends FuncionarioHospital{
     private int registro;
-    private String horario_plantao;
+    private String horarioPlantao;
 
     public int getRegistro() {
         return registro;
@@ -12,11 +12,11 @@ public class Enfermeiro extends FuncionarioHospital{
         this.registro = registro;
     }
 
-    public String getHorario_plantao() {
-        return horario_plantao;
+    public String getHorarioPlantao() {
+        return horarioPlantao;
     }
 
-    public void setHorario_plantao(String horario_plantao) {
-        this.horario_plantao = horario_plantao;
+    public void setHorarioPlantao(String horarioPlantao) {
+        this.horarioPlantao = horarioPlantao;
     }
 }
