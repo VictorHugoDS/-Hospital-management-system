@@ -30,6 +30,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         conteudoJPanel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
+        jMenuItemPaciente = new javax.swing.JMenuItem();
         jMenuItemConsultorio = new javax.swing.JMenuItem();
         jMenuItemFuncionarioHospital = new javax.swing.JMenuItem();
         jMenuItemEnfermeiros = new javax.swing.JMenuItem();
@@ -47,6 +48,14 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         getContentPane().add(conteudoJPanel);
 
         jMenu.setText("File");
+
+        jMenuItemPaciente.setText("Paciente");
+        jMenuItemPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPacienteActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemPaciente);
 
         jMenuItemConsultorio.setText("Consultorios");
         jMenuItemConsultorio.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +169,13 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         conteudoJPanel.setVisible(true);
     }//GEN-LAST:event_jMenuItemConsultaActionPerformed
 
+    private void jMenuItemPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPacienteActionPerformed
+        conteudoJPanel.removeAll();
+        conteudoJPanel.add(new JPanelPaciente());
+        conteudoJPanel.setVisible(false);
+        conteudoJPanel.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPacienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -206,5 +222,6 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemInternacao;
     private javax.swing.JMenuItem jMenuItemLeitos;
     private javax.swing.JMenuItem jMenuItemMedicos;
+    private javax.swing.JMenuItem jMenuItemPaciente;
     // End of variables declaration//GEN-END:variables
 }

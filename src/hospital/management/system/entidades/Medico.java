@@ -3,7 +3,7 @@ package hospital.management.system.entidades;
 public class Medico extends FuncionarioHospital{
     private int crm;
     private String especialidade;
-    private String horario_plantao;
+    private String horarioPlantao;
 
     public int getCrm() {
         return crm;
@@ -21,11 +21,11 @@ public class Medico extends FuncionarioHospital{
         this.especialidade = especialidade;
     }
 
-    public String getHorario_plantao() {
-        return horario_plantao;
+    public String getHorarioPlantao() {
+        return horarioPlantao;
     }
 
-    public void setHorario_plantao(String horario_plantao) {
-        this.horario_plantao = horario_plantao;
+    public void setHorarioPlantao(String horarioPlantao) {
+        this.horarioPlantao = horarioPlantao;
     }
 }
