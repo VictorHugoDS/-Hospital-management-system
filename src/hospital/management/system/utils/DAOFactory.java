@@ -1,23 +1,22 @@
 package hospital.management.system.utils;
 
 import hospital.management.system.persistencia.*;
-import hospital.management.system.persistencia.arquivo.*;
-import hospital.management.system.persistencia.postgresql.ConsultorioDAOPostgreSQL;
+import hospital.management.system.persistencia.postgresql.*;
 
 public class DAOFactory {
     public static ConsultorioDAO createConsultorioDAO() {
         return new ConsultorioDAOPostgreSQL();
     }
     public static FuncionarioHospitalDAO createFuncionarioHospitalDAO() {
-        return new FuncionarioHospitalDAOImplArq();
+        return new FuncionarioHospitalDAOPostgreSQL();
     }
     public static EnfermeiroDAO createEnfermeiroDAO() {
-        return new EnfermeiroDAOImplArq();
+        return new EnfermeiroDAOPostgreSQL();
     }
     public static MedicoDAO createMedicoDAO() {
-        return new MedicoDAOImplArq();
+        return new MedicoDAOPostgreSQL();
     }
     public static PacienteDAO createPacienteDAO() {
-        return new PacienteDAOImplArq();
+        return new PacienteDAOPostgreSQL();
     }
 }

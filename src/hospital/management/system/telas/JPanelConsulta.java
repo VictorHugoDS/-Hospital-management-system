@@ -37,7 +37,7 @@ public class JPanelConsulta extends javax.swing.JPanel {
         for (Consulta consulta: consultas){
           Object[] linha = new Object[3];
           linha[0]= consulta.getId();
-          linha[1]= consulta.getPeriodo_de_exames();
+          linha[1]= consulta.getPeriodoDeExames();
           linha[2]= consulta.getTratamento();
           
           modeloTabela.addRow(linha);
@@ -70,6 +70,13 @@ public class JPanelConsulta extends javax.swing.JPanel {
         jButtonEditar = new javax.swing.JButton();
 
         jLabelId.setText("Id:");
+
+        jTextFieldId.setEditable(false);
+        jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIdActionPerformed(evt);
+            }
+        });
 
         jLabelRelatorio.setText("Relatório:");
 
@@ -172,7 +179,7 @@ public class JPanelConsulta extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -224,8 +231,8 @@ public class JPanelConsulta extends javax.swing.JPanel {
         
         consulta.setId(Integer.parseInt(jTextFieldId.getText()));
         consulta.setTratamento(jTextAreaTratamento.getText());
-        consulta.setRelatorio_do_paciente(jTextAreaRelatorio.getText());
-        consulta.setPeriodo_de_exames(jTextFieldPeriodo.getText());
+        consulta.setRelatorioPaciente(jTextAreaRelatorio.getText());
+        consulta.setPeriodoDeExames(jTextFieldPeriodo.getText());
         if (consultadao.getById(consulta.getId())==null){
             consultadao.inserir(consulta);
         } else {
@@ -249,13 +256,17 @@ public class JPanelConsulta extends javax.swing.JPanel {
         if(linha!= -1){
             int id =(int) jTable.getValueAt(linha, 0);
             Consulta consulta = consultadao.getById(id);
-            jTextAreaRelatorio.setText(consulta.getRelatorio_do_paciente());
+            jTextAreaRelatorio.setText(consulta.getRelatorioPaciente());
             jTextAreaTratamento.setText(consulta.getTratamento());
             jTextFieldId.setText(consulta.getId()+"");
-            jTextFieldPeriodo.setText(consulta.getPeriodo_de_exames()); 
+            jTextFieldPeriodo.setText(consulta.getPeriodoDeExames()); 
         }
         
     }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jTextFieldIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIdActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

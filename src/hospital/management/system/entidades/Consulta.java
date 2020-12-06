@@ -1,22 +1,16 @@
 package hospital.management.system.entidades;
 
-import java.io.Serializable;
-
-
 public class Consulta extends Base {
-    private String relatorio_do_paciente;
+    private String relatorioPaciente;
     private String tratamento;
-    private String periodo_de_exames;
-    private Medico medico;
-    private Paciente paciente;
-    private Consultorio consultorio;
+    private String periodoDeExames;
 
-    public String getRelatorio_do_paciente() {
-        return relatorio_do_paciente;
+    public String getRelatorioPaciente() {
+        return relatorioPaciente;
     }
 
-    public void setRelatorio_do_paciente(String relatorio_do_paciente) {
-        this.relatorio_do_paciente = relatorio_do_paciente;
+    public void setRelatorioPaciente(String relatorioPaciente) {
+        this.relatorioPaciente = relatorioPaciente;
     }
 
     public String getTratamento() {
@@ -27,37 +21,11 @@ public class Consulta extends Base {
         this.tratamento = tratamento;
     }
 
-    public String getPeriodo_de_exames() {
-        return periodo_de_exames;
+    public String getPeriodoDeExames() {
+        return periodoDeExames;
     }
 
-    public void setPeriodo_de_exames(String periodo_de_exames) {
-        this.periodo_de_exames = periodo_de_exames;
+    public void setPeriodoDeExames(String periodoDeExames) {
+        this.periodoDeExames = periodoDeExames;
     }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    public Consultorio getConsultorio() {
-        return consultorio;
-    }
-
-    public void setConsultorio(Consultorio consultorio) {
-        this.consultorio = consultorio;
-    }
-    
-    
 }

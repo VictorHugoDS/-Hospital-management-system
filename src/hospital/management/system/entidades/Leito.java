@@ -1,16 +1,9 @@
 package hospital.management.system.entidades;
 
-import java.io.Serializable;
-
 public class Leito extends Base {
     private int numero;
     private String tipo;
-    private Enfermeiro enfermeiro;
-
-    public Leito() {
-    }
     
-
     public int getNumero() {
         return numero;
     }
@@ -25,13 +18,5 @@ public class Leito extends Base {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-    
-    public Enfermeiro getEnfermeiro() {
-        return enfermeiro;
-    }
-
-    public void setEnfermeiro(Enfermeiro enfermeiro) {
-        this.enfermeiro = enfermeiro;
     }
 }
