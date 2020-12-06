@@ -1,6 +1,6 @@
 package hospital.management.system.entidades;
 
-public class Paciente {
+public class Paciente extends Base {
     private String nome;
     private String cpf;
     private String endereco;

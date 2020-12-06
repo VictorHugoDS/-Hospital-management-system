@@ -134,6 +134,13 @@ public class JPanelPaciente extends javax.swing.JPanel {
 
         jLabelId.setText("ID:");
 
+        jTextFieldId.setEditable(false);
+        jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -269,6 +276,10 @@ public class JPanelPaciente extends javax.swing.JPanel {
         }
         carregarTabela();
     }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jTextFieldIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIdActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

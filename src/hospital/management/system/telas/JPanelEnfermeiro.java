@@ -90,6 +90,8 @@ public class JPanelEnfermeiro extends javax.swing.JPanel {
 
         jLabel3.setText("ID:");
 
+        jTextFieldId.setEditable(false);
+
         jLabel1.setText("CPF:");
 
         jTextFieldCpf.addActionListener(new java.awt.event.ActionListener() {

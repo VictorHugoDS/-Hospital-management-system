@@ -54,6 +54,7 @@ public class JPanelConsultorio extends javax.swing.JPanel {
 
         jLabel2.setText("Tipo:");
 
+        jTextFieldId.setEditable(false);
         jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdActionPerformed(evt);
@@ -177,7 +178,13 @@ public class JPanelConsultorio extends javax.swing.JPanel {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         Consultorio consultorio = new Consultorio();
         
-        consultorio.setId(Integer.parseInt(jTextFieldId.getText()));
+        int id = 0;
+        try {
+        id = Integer.parseInt(jTextFieldId.getText());
+        } catch(NumberFormatException ex) {
+            id = 0;
+        }
+        consultorio.setId(id);
         consultorio.setNumero(Integer.parseInt(jTextFieldNumero.getText()));
         consultorio.setTipo(jTextFieldTipo.getText());
         if (consultorioDAO.getById(consultorio.getId()) == null) {
