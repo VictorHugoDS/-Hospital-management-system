@@ -2,8 +2,8 @@ package hospital.management.system.entidades;
 
 
 public class Ambulatorio extends Base {
-    int numero;
-    Enfermeiro enfermeiro;
+    private int numero;
+    private Enfermeiro enfermeiro;
 
     public int getNumero() {
         return numero;

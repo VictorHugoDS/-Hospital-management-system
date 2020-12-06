@@ -3,10 +3,7 @@ package hospital.management.system.entidades;
 import java.io.Serializable;
 
 
-public class Consulta extends Base implements Serializable {
-
-    public Consulta() {
-    }
+public class Consulta extends Base {
     private String relatorio_do_paciente;
     private String tratamento;
     private String periodo_de_exames;

@@ -2,13 +2,13 @@
 package hospital.management.system.entidades;
 
 public class Observacao extends Base{
-    String medicacao;
-    String data_de_entrada;
-    String data_de_saida;
-    String horario_de_entrada;
-    String horario_de_saida;
-    Ambulatorio ambulatorio;
-    Paciente paciente;
+    private String medicacao;
+    private String data_de_entrada;
+    private String data_de_saida;
+    private String horario_de_entrada;
+    private String horario_de_saida;
+    private Ambulatorio ambulatorio;
+    private Paciente paciente;
 
     public String getMedicacao() {
         return medicacao;

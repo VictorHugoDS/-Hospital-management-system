@@ -1,12 +1,12 @@
 package hospital.management.system.entidades;
 
 public class FuncionarioHospital extends Base {
-    protected String nome;
-    protected String cpf;
-    protected String telefone;
-    protected String funcao;
-    protected String horario;
-    protected double salario;
+    private String nome;
+    private String cpf;
+    private String telefone;
+    private String funcao;
+    private String horario;
+    private double salario;
 
     public String getNome() {
         return nome;
