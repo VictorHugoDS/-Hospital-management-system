@@ -1,9 +1,7 @@
 package hospital.management.system.entidades;
 
-
 public class Ambulatorio extends Base {
-    int numero;
-    Enfermeiro enfermeiro;
+    private int numero;
 
     public int getNumero() {
         return numero;
@@ -12,6 +10,4 @@ public class Ambulatorio extends Base {
     public void setNumero(int numero) {
         this.numero = numero;
     }
-    
-    
 }

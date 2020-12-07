@@ -37,10 +37,10 @@ public class JPanelInternacao extends javax.swing.JPanel {
         for (Internacao internacao: internacoes){
           Object[] linha = new Object[5];
           linha[0]= internacao.getId();
-          linha[1]= internacao.getData_de_entrada();
-          linha[2]= internacao.getHorario_de_entrada();
-          linha[3]= internacao.getData_de_saida();
-          linha[4]= internacao.getHorario_de_saida();
+          linha[1]= internacao.getDataEntrada();
+          linha[2]= internacao.getHorarioEntrada();
+          linha[3]= internacao.getDataSaida();
+          linha[4]= internacao.getHorarioSaida();
           
           modeloTabela.addRow(linha);
         }
@@ -86,6 +86,8 @@ public class JPanelInternacao extends javax.swing.JPanel {
         jLabelHorario_de_saida.setText("Horário de Saída");
 
         jLabelMedicacao.setText("Medicação:");
+
+        jTextFieldId.setEditable(false);
 
         jTextFieldData_de_entrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,10 +268,10 @@ public class JPanelInternacao extends javax.swing.JPanel {
         Internacao internacao = new Internacao();
         
         internacao.setId(Integer.parseInt(jTextFieldId.getText()));
-        internacao.setData_de_entrada(jTextFieldData_de_entrada.getText());
-        internacao.setHorario_de_entrada(jTextFieldHorario_de_entrada.getText());
-        internacao.setData_de_saida(jTextFieldData_de_saida.getText());
-        internacao.setHorario_de_saida(jTextFieldHorario_de_saida.getText());
+        internacao.setDataEntrada(jTextFieldData_de_entrada.getText());
+        internacao.setHorarioEntrada(jTextFieldHorario_de_entrada.getText());
+        internacao.setDataSaida(jTextFieldData_de_saida.getText());
+        internacao.setHorarioSaida(jTextFieldHorario_de_saida.getText());
         internacao.setMedicacao(jTextAreaMedicacao.getText());
         if(internacaodao.getById(internacao.getId())==null){
             internacaodao.inserir(internacao);
@@ -296,10 +298,10 @@ public class JPanelInternacao extends javax.swing.JPanel {
             Internacao leito = internacaodao.getById(id);
             
             jTextFieldId.setText(leito.getId()+"");
-            jTextFieldData_de_entrada.setText(leito.getData_de_entrada());
-            jTextFieldHorario_de_entrada.setText(leito.getHorario_de_entrada());
-            jTextFieldData_de_saida.setText(leito.getData_de_saida());
-            jTextFieldHorario_de_saida.setText(leito.getHorario_de_saida());
+            jTextFieldData_de_entrada.setText(leito.getDataEntrada());
+            jTextFieldHorario_de_entrada.setText(leito.getHorarioEntrada());
+            jTextFieldData_de_saida.setText(leito.getDataSaida());
+            jTextFieldHorario_de_saida.setText(leito.getHorarioSaida());
             jTextAreaMedicacao.setText(leito.getMedicacao());
         } 
     }//GEN-LAST:event_jButtonEditarActionPerformed
