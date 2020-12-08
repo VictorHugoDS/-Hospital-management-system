@@ -3,6 +3,8 @@ package hospital.management.system.entidades;
 public class Enfermeiro extends FuncionarioHospital{
     private int registro;
     private String horarioPlantao;
+    private int idLeito;
+    private int idAmbulatorio;
 
     public int getRegistro() {
         return registro;

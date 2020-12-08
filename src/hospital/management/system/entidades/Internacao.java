@@ -6,6 +6,8 @@ public class Internacao extends Base {
     private String horarioEntrada;
     private String dataSaida;
     private String horarioSaida;
+    private int idLeito;
+    private int idPaciente;
 
     public String getMedicacao() {
         return medicacao;
