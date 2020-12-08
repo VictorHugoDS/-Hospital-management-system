@@ -38,16 +38,16 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
         try {
             abrirConexao();
             
-            String sql = "INSERT INTO consulta (relatorio_do_paciente, tratamento, periodo_de_exames, id_medico, id_paciente, id_consultorio) VALUES ('?', '?', '?', ?, ?, ?);";
+            String sql = "INSERT INTO consulta (relatorioPaciente, tratamento, periodoDeExames, idMedico, idPaciente, idConsultorio) VALUES ('?', '?', '?', ?, ?, ?);";
             
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
-            pstm.setString(1, consulta.getRelatorio_do_paciente());
+            pstm.setString(1, consulta.getRelatorioPaciente());
             pstm.setString(2, consulta.getTratamento());
-            pstm.setString(3, consulta.getPeriodo_de_exames());
-            pstm.setInt(4, consulta.getId_medico());
-            pstm.setInt(5, consulta.getId_paciente());
-            pstm.setInt(6, consulta.getId_consultorio());
+            pstm.setString(3, consulta.getPeriodoDeExames());
+            pstm.setInt(4, consulta.getIdMedico());
+            pstm.setInt(5, consulta.getIdPaciente());
+            pstm.setInt(6, consulta.getIdConsultorio());
             
             pstm.execute();
             
@@ -62,15 +62,15 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE consulta SET relatorio_do_paciente = ?, tratamento = ?, periodo_de_exames = ?, id_medico = ?, id_paciente = ?, id_consultorio = ? WHERE  id = ?;";
+            String sql = "UPDATE consulta SET relatorioPaciente = ?, tratamento = ?, periodoDeExames = ?, idMedico = ?, idPaciente = ?, idConsultorio = ? WHERE  id = ?;";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
-            pstm.setString(1, consulta.getRelatorio_do_paciente());
+            pstm.setString(1, consulta.getRelatorioPaciente());
             pstm.setString(2, consulta.getTratamento());
-            pstm.setString(3, consulta.getPeriodo_de_exames());
-            pstm.setInt(4, consulta.getId_medico());
-            pstm.setInt(5, consulta.getId_paciente());
-            pstm.setInt(6, consulta.getId_consultorio());
+            pstm.setString(3, consulta.getPeriodoDeExames());
+            pstm.setInt(4, consulta.getIdMedico());
+            pstm.setInt(5, consulta.getIdPaciente());
+            pstm.setInt(6, consulta.getIdConsultorio());
             
             pstm.execute();
             
@@ -111,12 +111,12 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
             if (rs.next()) {
                 consulta = new Consulta();
                 consulta.setId(id);
-                consulta.setRelatorio_do_paciente(rs.getString("relatorio_do_paciente"));
-                consulta.setPeriodo_de_exames(rs.getString("periodo_de_exames"));
+                consulta.setRelatorioPaciente(rs.getString("relatorioPaciente"));
+                consulta.setPeriodoDeExames(rs.getString("periodoDeExames"));
                 consulta.setTratamento(rs.getString("tratamento"));
-                consulta.setId_consultorio(rs.getInt("id_consultorio"));
-                consulta.setId_medico(rs.getInt("id_medico"));
-                consulta.setId_paciente(rs.getInt("id_paciente"));
+                consulta.setIdConsultorio(rs.getInt("idConsultorio"));
+                consulta.setIdMedico(rs.getInt("idMedico"));
+                consulta.setIdPaciente(rs.getInt("idPaciente"));
             }
             rs.close();
             fecharConexao();
@@ -138,12 +138,12 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
             
             if (rs.next()) {
                 Consulta consulta = new Consulta();
-                consulta.setRelatorio_do_paciente(rs.getString("relatorio_do_paciente"));
-                consulta.setPeriodo_de_exames(rs.getString("periodo_de_exames"));
+                consulta.setRelatorioPaciente(rs.getString("relatorioPaciente"));
+                consulta.setPeriodoDeExames(rs.getString("periodoDeExames"));
                 consulta.setTratamento(rs.getString("tratamento"));
-                consulta.setId_consultorio(rs.getInt("id_consultorio"));
-                consulta.setId_medico(rs.getInt("id_medico"));
-                consulta.setId_paciente(rs.getInt("id_paciente"));
+                consulta.setIdConsultorio(rs.getInt("idConsultorio"));
+                consulta.setIdMedico(rs.getInt("idMedico"));
+                consulta.setIdPaciente(rs.getInt("idPaciente"));
                 lista.add(consulta);
             }
             rs.close();

@@ -37,17 +37,17 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "INSERT INTO internacao (medicacao, data_de_entrada, data_de_saida, horario_de_entrada, horario_de_saida, id_leito, id_paciente ) VALUES ('?','?','?','?','?',?,?);";
+            String sql = "INSERT INTO internacao (medicacao, dataEntrada, dataSaida, horarioEntrada, horarioSaida, idLeito, idPaciente ) VALUES ('?','?','?','?','?',?,?);";
             
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, internacao.getMedicacao());
-            pstm.setString(2, internacao.getData_de_entrada());
-            pstm.setString(3, internacao.getData_de_saida());
-            pstm.setString(4, internacao.getHorario_de_entrada());
-            pstm.setString(5, internacao.getHorario_de_saida());
-            pstm.setInt(6, internacao.getId_leito());
-            pstm.setInt(7, internacao.getId_paciente());
+            pstm.setString(2, internacao.getDataEntrada());
+            pstm.setString(3, internacao.getDataSaida());
+            pstm.setString(4, internacao.getHorarioEntrada());
+            pstm.setString(5, internacao.getHorarioSaida());
+            pstm.setInt(6, internacao.getIdLeito());
+            pstm.setInt(7, internacao.getIdPaciente());
             
             pstm.execute();
             
@@ -62,16 +62,16 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE internacao SET medicacao = ?, data_de_entrada = ?, data_de_saida = ?,horario_de_entrada = ?,horario_de_saida = ?, id_leito = ?, id_paciente = ?  WHERE  id = ?;";
+            String sql = "UPDATE internacao SET medicacao = ?, dataEntrada = ?, dataSaida = ?,horarioEntrada = ?,horarioSaida = ?, idLeito = ?, idPaciente = ?  WHERE  id = ?;";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, internacao.getMedicacao());
-            pstm.setString(2, internacao.getData_de_entrada());
-            pstm.setString(3, internacao.getData_de_saida());
-            pstm.setString(4, internacao.getHorario_de_entrada());
-            pstm.setString(5, internacao.getHorario_de_saida());
-            pstm.setInt(6, internacao.getId_leito());
-            pstm.setInt(7, internacao.getId_paciente());
+            pstm.setString(2, internacao.getDataEntrada());
+            pstm.setString(3, internacao.getDataSaida());
+            pstm.setString(4, internacao.getHorarioEntrada());
+            pstm.setString(5, internacao.getHorarioSaida());
+            pstm.setInt(6, internacao.getIdLeito());
+            pstm.setInt(7, internacao.getIdPaciente());
             
             pstm.execute();
             
@@ -113,12 +113,12 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
                 internacao = new Internacao();
                 internacao.setId(id);
                 internacao.setMedicacao(rs.getString("medicacao"));
-                internacao.setData_de_entrada(rs.getString("data_de_entrada"));
-                internacao.setData_de_saida(rs.getString("data_de_saida"));
-                internacao.setHorario_de_entrada(rs.getString("horario_de_entrada"));
-                internacao.setHorario_de_saida(rs.getString("horario_de_saida"));
-                internacao.setId_leito(rs.getInt("id_leito"));
-                internacao.setId_paciente(rs.getInt("id_paciente"));
+                internacao.setDataEntrada(rs.getString("dataEntrada"));
+                internacao.setDataSaida(rs.getString("dataSaida"));
+                internacao.setHorarioEntrada(rs.getString("horarioEntrada"));
+                internacao.setHorarioSaida(rs.getString("horarioSaida"));
+                internacao.setIdLeito(rs.getInt("idLeito"));
+                internacao.setIdPaciente(rs.getInt("idPaciente"));
             }
             rs.close();
             fecharConexao();
@@ -141,12 +141,12 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
             if (rs.next()) {
                 Internacao internacao = new Internacao();
                 internacao.setMedicacao(rs.getString("medicacao"));
-                internacao.setData_de_entrada(rs.getString("data_de_entrada"));
-                internacao.setData_de_saida(rs.getString("data_de_saida"));
-                internacao.setHorario_de_entrada(rs.getString("horario_de_entrada"));
-                internacao.setHorario_de_saida(rs.getString("horario_de_saida"));
-                internacao.setId_leito(rs.getInt("id_leito"));
-                internacao.setId_paciente(rs.getInt("id_paciente"));
+                internacao.setDataEntrada(rs.getString("dataEntrada"));
+                internacao.setDataSaida(rs.getString("dataSaida"));
+                internacao.setHorarioEntrada(rs.getString("horarioEntrada"));
+                internacao.setHorarioSaida(rs.getString("horarioSaida"));
+                internacao.setIdLeito(rs.getInt("idLeito"));
+                internacao.setIdPaciente(rs.getInt("idPaciente"));
                 lista.add(internacao);
             }
             rs.close();

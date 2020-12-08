@@ -1,23 +1,13 @@
-
 package hospital.management.system.entidades;
 
-
-import java.io.Serializable;
-
-public class Internacao extends Base implements Serializable  {
-
+public class Internacao extends Base {
     private String medicacao;
-    private String data_de_entrada;
-    private String horario_de_entrada;
-    private String data_de_saida;
-    private String horario_de_saida;
-    private int id_leito;
-    private int id_paciente;
-
-    public Internacao() {
-    }
-    
-    
+    private String dataEntrada;
+    private String horarioEntrada;
+    private String dataSaida;
+    private String horarioSaida;
+    private int idLeito;
+    private int idPaciente;
 
     public String getMedicacao() {
         return medicacao;
@@ -27,53 +17,52 @@ public class Internacao extends Base implements Serializable  {
         this.medicacao = medicacao;
     }
 
-    public String getData_de_entrada() {
-        return data_de_entrada;
+    public String getDataEntrada() {
+        return dataEntrada;
     }
 
-    public void setData_de_entrada(String data_de_entrada) {
-        this.data_de_entrada = data_de_entrada;
+    public void setDataEntrada(String dataEntrada) {
+        this.dataEntrada = dataEntrada;
     }
 
-    public String getHorario_de_entrada() {
-        return horario_de_entrada;
+    public String getHorarioEntrada() {
+        return horarioEntrada;
     }
 
-    public void setHorario_de_entrada(String horario_de_entrada) {
-        this.horario_de_entrada = horario_de_entrada;
+    public void setHorarioEntrada(String horarioEntrada) {
+        this.horarioEntrada = horarioEntrada;
     }
 
-    public String getData_de_saida() {
-        return data_de_saida;
+    public String getDataSaida() {
+        return dataSaida;
     }
 
-    public void setData_de_saida(String data_de_saida) {
-        this.data_de_saida = data_de_saida;
+    public void setDataSaida(String dataSaida) {
+        this.dataSaida = dataSaida;
     }
 
-    public String getHorario_de_saida() {
-        return horario_de_saida;
+    public String getHorarioSaida() {
+        return horarioSaida;
     }
 
-    public void setHorario_de_saida(String horario_de_saida) {
-        this.horario_de_saida = horario_de_saida;
+    public void setHorarioSaida(String horarioSaida) {
+        this.horarioSaida = horarioSaida;
     }
 
-    public int getId_leito() {
-        return id_leito;
+    public int getIdLeito() {
+        return idLeito;
     }
 
-    public void setId_leito(int id_leito) {
-        this.id_leito = id_leito;
+    public void setIdLeito(int idLeito) {
+        this.idLeito = idLeito;
     }
 
-    public int getId_paciente() {
-        return id_paciente;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setId_paciente(int id_paciente) {
-        this.id_paciente = id_paciente;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
-    
     
 }

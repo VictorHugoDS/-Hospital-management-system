@@ -1,16 +1,10 @@
 package hospital.management.system.entidades;
 
-import java.io.Serializable;
-
-public class Leito extends Base implements Serializable   {
+public class Leito extends Base {
     private int numero;
     private String tipo;
     private int id_enfermeiro;
-
-    public Leito() {
-    }
     
-
     public int getNumero() {
         return numero;
     }

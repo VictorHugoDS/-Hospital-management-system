@@ -37,17 +37,17 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "INSERT INTO observacao (medicacao, data_de_entrada, data_de_saida, horario_de_entrada, horario_de_saida, id_ambulatorio, id_paciente) VALUES ('?', '?', '?', '?', '?', ?, ?);";
+            String sql = "INSERT INTO observacao (medicacao, dataEntrada, dataSaida, horarioEntrada, horario_de_saida, idAmbulatorio, idPaciente) VALUES ('?', '?', '?', '?', '?', ?, ?);";
             
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, observacao.getMedicacao());
-            pstm.setString(2, observacao.getData_de_entrada());
-            pstm.setString(3, observacao.getData_de_saida());
-            pstm.setString(4, observacao.getHorario_de_entrada());
-            pstm.setString(5, observacao.getHorario_de_saida());
-            pstm.setInt(6, observacao.getId_ambulatorio());
-            pstm.setInt(7, observacao.getId_paciente());
+            pstm.setString(2, observacao.getDataEntrada());
+            pstm.setString(3, observacao.getDataSaida());
+            pstm.setString(4, observacao.getHorarioEntrada());
+            pstm.setString(5, observacao.getHorarioSaida());
+            pstm.setInt(6, observacao.getIdAmbulatorio());
+            pstm.setInt(7, observacao.getIdPaciente());
             
             
             pstm.execute();
@@ -63,16 +63,16 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE observacao SET medicacao = ?, data_de_entrada = ?, data_de_saida= ?, horario_de_entrada= ?, horario_de_saida= ?, id_ambulatorio= ?, id_paciente= ?  WHERE  id = ?;";
+            String sql = "UPDATE observacao SET medicacao = ?, dataEntrada = ?, dataSaida= ?, horarioEntrada= ?, horario_de_saida= ?, idAmbulatorio= ?, idPaciente= ?  WHERE  id = ?;";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, observacao.getMedicacao());
-            pstm.setString(2, observacao.getData_de_entrada());
-            pstm.setString(3, observacao.getData_de_saida());
-            pstm.setString(4, observacao.getHorario_de_entrada());
-            pstm.setString(5, observacao.getHorario_de_saida());
-            pstm.setInt(6, observacao.getId_ambulatorio());
-            pstm.setInt(7, observacao.getId_paciente());
+            pstm.setString(2, observacao.getDataEntrada());
+            pstm.setString(3, observacao.getDataSaida());
+            pstm.setString(4, observacao.getHorarioEntrada());
+            pstm.setString(5, observacao.getHorarioSaida());
+            pstm.setInt(6, observacao.getIdAmbulatorio());
+            pstm.setInt(7, observacao.getIdPaciente());
             pstm.setInt(8, observacao.getId());
             
             pstm.execute();
@@ -115,12 +115,12 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
                 observacao = new Observacao();
                 observacao.setId(id);
                 observacao.setMedicacao(rs.getString("medicacao"));
-                observacao.setData_de_entrada(rs.getString("data_de_entrada"));
-                observacao.setData_de_saida(rs.getString("data_de_saida"));
-                observacao.setHorario_de_entrada(rs.getString("horario_de_entrada"));
-                observacao.setHorario_de_saida(rs.getString("horario_de_saida"));
-                observacao.setId_ambulatorio(rs.getInt("id_ambulatorio"));
-                observacao.setId_paciente(rs.getInt("id_paciente"));
+                observacao.setDataEntrada(rs.getString("dataEntrada"));
+                observacao.setDataSaida(rs.getString("dataSaida"));
+                observacao.setHorarioEntrada(rs.getString("horarioEntrada"));
+                observacao.setHorarioSaida(rs.getString("horario_de_saida"));
+                observacao.setIdAmbulatorio(rs.getInt("idAmbulatorio"));
+                observacao.setIdPaciente(rs.getInt("idPaciente"));
             }
             rs.close();
             fecharConexao();
@@ -143,12 +143,12 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
             if (rs.next()) {
                 Observacao observacao = new Observacao();
                 observacao.setMedicacao(rs.getString("medicacao"));
-                observacao.setData_de_entrada(rs.getString("data_de_entrada"));
-                observacao.setData_de_saida(rs.getString("data_de_saida"));
-                observacao.setHorario_de_entrada(rs.getString("horario_de_entrada"));
-                observacao.setHorario_de_saida(rs.getString("horario_de_saida"));
-                observacao.setId_ambulatorio(rs.getInt("id_ambulatorio"));
-                observacao.setId_paciente(rs.getInt("id_paciente"));
+                observacao.setDataEntrada(rs.getString("dataEntrada"));
+                observacao.setDataSaida(rs.getString("dataSaida"));
+                observacao.setHorarioEntrada(rs.getString("horarioEntrada"));
+                observacao.setHorarioSaida(rs.getString("horario_de_saida"));
+                observacao.setIdAmbulatorio(rs.getInt("idAmbulatorio"));
+                observacao.setIdPaciente(rs.getInt("idPaciente"));
                 lista.add(observacao);
             }
             rs.close();

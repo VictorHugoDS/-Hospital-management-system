@@ -1,25 +1,19 @@
 package hospital.management.system.entidades;
 
-import java.io.Serializable;
-
-
-public class Consulta extends Base implements Serializable {
-
-    public Consulta() {
-    }
-    private String relatorio_do_paciente;
+public class Consulta extends Base {
+    private String relatorioPaciente;
     private String tratamento;
-    private String periodo_de_exames;
-    private int id_medico;
-    private int id_paciente;
-    private int id_consultorio;
+    private String periodoDeExames;
+    private int idConsultorio;
+    private int idMedico;
+    private int idPaciente;
 
-    public String getRelatorio_do_paciente() {
-        return relatorio_do_paciente;
+    public String getRelatorioPaciente() {
+        return relatorioPaciente;
     }
 
-    public void setRelatorio_do_paciente(String relatorio_do_paciente) {
-        this.relatorio_do_paciente = relatorio_do_paciente;
+    public void setRelatorioPaciente(String relatorioPaciente) {
+        this.relatorioPaciente = relatorioPaciente;
     }
 
     public String getTratamento() {
@@ -30,37 +24,37 @@ public class Consulta extends Base implements Serializable {
         this.tratamento = tratamento;
     }
 
-    public String getPeriodo_de_exames() {
-        return periodo_de_exames;
+    public String getPeriodoDeExames() {
+        return periodoDeExames;
     }
 
-    public void setPeriodo_de_exames(String periodo_de_exames) {
-        this.periodo_de_exames = periodo_de_exames;
+    public void setPeriodoDeExames(String periodoDeExames) {
+        this.periodoDeExames = periodoDeExames;
     }
 
-    public int getId_medico() {
-        return id_medico;
+    public int getIdConsultorio() {
+        return idConsultorio;
     }
 
-    public void setId_medico(int id_medico) {
-        this.id_medico = id_medico;
+    public void setIdConsultorio(int idConsultorio) {
+        this.idConsultorio = idConsultorio;
     }
 
-    public int getId_paciente() {
-        return id_paciente;
+    public int getIdMedico() {
+        return idMedico;
     }
 
-    public void setId_paciente(int id_paciente) {
-        this.id_paciente = id_paciente;
+    public void setIdMedico(int idMedico) {
+        this.idMedico = idMedico;
     }
 
-    public int getId_consultorio() {
-        return id_consultorio;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setId_consultorio(int id_consultorio) {
-        this.id_consultorio = id_consultorio;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
-    
+
     
 }
