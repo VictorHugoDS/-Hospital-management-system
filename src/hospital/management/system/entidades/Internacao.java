@@ -11,8 +11,8 @@ public class Internacao extends Base implements Serializable  {
     private String horario_de_entrada;
     private String data_de_saida;
     private String horario_de_saida;
-    private Leito leito;
-    private Paciente paciente;
+    private int id_leito;
+    private int id_paciente;
 
     public Internacao() {
     }
@@ -59,20 +59,20 @@ public class Internacao extends Base implements Serializable  {
         this.horario_de_saida = horario_de_saida;
     }
 
-    public Leito getLeito() {
-        return leito;
+    public int getId_leito() {
+        return id_leito;
     }
 
-    public void setLeito(Leito leito) {
-        this.leito = leito;
+    public void setId_leito(int id_leito) {
+        this.id_leito = id_leito;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public int getId_paciente() {
+        return id_paciente;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setId_paciente(int id_paciente) {
+        this.id_paciente = id_paciente;
     }
     
     

@@ -20,4 +20,19 @@ public class DAOFactory {
     public static PacienteDAO createPacienteDAO() {
         return new PacienteDAOImplArq();
     }
+    public static LeitoDAO createLeitoDAO() {
+        return new LeitoDAOImplArq();
+    }
+    public static ConsultaDAO createConsultaDAO() {
+        return new ConsultaDAOImplArq();
+    }
+    public static InternacaoDAO createInternacaoDAO() {
+        return new InternacaoDAOImplArq();
+    }
+    public static ObservacaoDAO createObservacaoDAO() {
+        return new ObservacaoDAOImplArq();
+    }
+    public static AmbulatorioDAO createAmbulatorioDAO() {
+        return new AmbulatorioDAOImplArq();
+    }
 }

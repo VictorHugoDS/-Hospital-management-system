@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Leito extends Base implements Serializable   {
     private int numero;
     private String tipo;
-    private Enfermeiro enfermeiro;
+    private int id_enfermeiro;
 
     public Leito() {
     }
@@ -27,11 +27,11 @@ public class Leito extends Base implements Serializable   {
         this.tipo = tipo;
     }
     
-    public Enfermeiro getEnfermeiro() {
-        return enfermeiro;
+    public int getEnfermeiro() {
+        return id_enfermeiro;
     }
 
-    public void setEnfermeiro(Enfermeiro enfermeiro) {
-        this.enfermeiro = enfermeiro;
+    public void setEnfermeiro(int id_enfermeiro) {
+        this.id_enfermeiro = id_enfermeiro;
     }
 }

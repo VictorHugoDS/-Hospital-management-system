@@ -7,8 +7,8 @@ public class Observacao extends Base{
     String data_de_saida;
     String horario_de_entrada;
     String horario_de_saida;
-    Ambulatorio ambulatorio;
-    Paciente paciente;
+    int id_ambulatorio;
+    int id_paciente;
 
     public String getMedicacao() {
         return medicacao;
@@ -48,6 +48,22 @@ public class Observacao extends Base{
 
     public void setHorario_de_saida(String horario_de_saida) {
         this.horario_de_saida = horario_de_saida;
+    }
+
+    public int getId_ambulatorio() {
+        return id_ambulatorio;
+    }
+
+    public void setId_ambulatorio(int id_ambulatorio) {
+        this.id_ambulatorio = id_ambulatorio;
+    }
+
+    public int getId_paciente() {
+        return id_paciente;
+    }
+
+    public void setId_paciente(int id_paciente) {
+        this.id_paciente = id_paciente;
     }
     
     
