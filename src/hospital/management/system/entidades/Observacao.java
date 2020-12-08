@@ -6,6 +6,8 @@ public class Observacao extends Base{
     private String dataSaida;
     private String horarioEntrada;
     private String horarioSaida;
+    private int idAmbulatorio;
+    private int idPaciente;
 
     public String getMedicacao() {
         return medicacao;

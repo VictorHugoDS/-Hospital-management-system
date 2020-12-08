@@ -4,6 +4,9 @@ public class Consulta extends Base {
     private String relatorioPaciente;
     private String tratamento;
     private String periodoDeExames;
+    private int idConsultorio;
+    private int idMedico;
+    private int idPaciente;
 
     public String getRelatorioPaciente() {
         return relatorioPaciente;
