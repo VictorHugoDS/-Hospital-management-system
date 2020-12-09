@@ -70,7 +70,7 @@ public class MedicoDAOMySQL implements MedicoDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE medicoSET nome = ?, cpf = ?, telefone = ?, funcao = ?, horario = ?, salario = ?, crm = ?, especialidade = ?, horarioPlantao = ? WHERE  id = ?";
+            String sql = "UPDATE medico SET nome = ?, cpf = ?, telefone = ?, funcao = ?, horario = ?, salario = ?, crm = ?, especialidade = ?, horarioPlantao = ? WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, medico.getNome());

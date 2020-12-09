@@ -66,15 +66,15 @@ public class PacienteDAOMySQL implements PacienteDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE pacienteSET nome = ?, cpf = ?, endereco = ?, telefone = ?, convenio = ? WHERE  id = ?";
+            String sql = "UPDATE paciente SET nome = ?, cpf = ?, endereco = ?, telefone = ?, convenio = ? WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, paciente.getNome());
             pstm.setString(2, paciente.getCpf());
-            pstm.setString(2, paciente.getEndereco());
-            pstm.setString(3, paciente.getTelefone());
-            pstm.setString(4, paciente.getConvenio());
-            pstm.setInt(5, paciente.getId());
+            pstm.setString(3, paciente.getEndereco());
+            pstm.setString(4, paciente.getTelefone());
+            pstm.setString(5, paciente.getConvenio());
+            pstm.setInt(6, paciente.getId());
             
             pstm.execute();
             

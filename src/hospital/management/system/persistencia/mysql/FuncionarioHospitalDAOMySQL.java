@@ -67,7 +67,7 @@ public class FuncionarioHospitalDAOMySQL implements FuncionarioHospitalDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE funcionarioHospitalSET nome = ?, cpf = ?, telefone = ?, funcao = ?, horario = ?, salario = ? WHERE  id = ?";
+            String sql = "UPDATE funcionarioHospital SET nome = ?, cpf = ?, telefone = ?, funcao = ?, horario = ?, salario = ? WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, funcionarioHospital.getNome());

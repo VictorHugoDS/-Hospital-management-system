@@ -70,7 +70,7 @@ public class EnfermeiroDAOMySQL implements EnfermeiroDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE enfermeiroSET nome = ?, cpf = ?, telefone = ?, funcao = ?, horario = ?, salario = ?, registro = ?, horarioPlantao = ?, idLeito = ? WHERE  id = ?";
+            String sql = "UPDATE enfermeiro SET nome = ?, cpf = ?, telefone = ?, funcao = ?, horario = ?, salario = ?, registro = ?, horarioPlantao = ?, idLeito = ? WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, enfermeiro.getNome());

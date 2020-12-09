@@ -64,7 +64,7 @@ public class AmbulatorioDAOMySQL implements AmbulatorioDAO{
         try {
             abrirConexao();
             
-            String sql = "UPDATE ambulatorio SET numero = ? WHERE  id = ?;";
+            String sql = "UPDATE ambulatorio SET numero = ? WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setInt(1, ambulatorio.getNumero());

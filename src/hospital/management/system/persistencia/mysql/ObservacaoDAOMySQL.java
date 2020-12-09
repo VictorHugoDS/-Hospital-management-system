@@ -43,7 +43,7 @@ public class ObservacaoDAOMySQL implements ObservacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "INSERT INTO observacao (medicacao, dataEntrada, dataSaida, horarioEntrada, horario_de_saida, idAmbulatorio, idPaciente) VALUES (?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO observacao (medicacao, dataEntrada, dataSaida, horarioEntrada, horarioSaida, idAmbulatorio, idPaciente) VALUES (?, ?, ?, ?, ?, ?, ?);";
             
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
@@ -69,7 +69,7 @@ public class ObservacaoDAOMySQL implements ObservacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE observacao SET medicacao = ?, dataEntrada = ?, dataSaida= ?, horarioEntrada= ?, horario_de_saida= ?, idAmbulatorio= ?, idPaciente= ?  WHERE  id = ?";
+            String sql = "UPDATE observacao SET medicacao = ?, dataEntrada = ?, dataSaida= ?, horarioEntrada= ?, horarioSaida= ?, idAmbulatorio= ?, idPaciente= ?  WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, observacao.getMedicacao());
@@ -124,7 +124,7 @@ public class ObservacaoDAOMySQL implements ObservacaoDAO {
                 observacao.setDataEntrada(rs.getString("dataEntrada"));
                 observacao.setDataSaida(rs.getString("dataSaida"));
                 observacao.setHorarioEntrada(rs.getString("horarioEntrada"));
-                observacao.setHorarioSaida(rs.getString("horario_de_saida"));
+                observacao.setHorarioSaida(rs.getString("horarioSaida"));
                 observacao.setIdAmbulatorio(rs.getInt("idAmbulatorio"));
                 observacao.setIdPaciente(rs.getInt("idPaciente"));
             }
@@ -153,7 +153,7 @@ public class ObservacaoDAOMySQL implements ObservacaoDAO {
                 observacao.setDataEntrada(rs.getString("dataEntrada"));
                 observacao.setDataSaida(rs.getString("dataSaida"));
                 observacao.setHorarioEntrada(rs.getString("horarioEntrada"));
-                observacao.setHorarioSaida(rs.getString("horario_de_saida"));
+                observacao.setHorarioSaida(rs.getString("horarioSaida"));
                 observacao.setIdAmbulatorio(rs.getInt("idAmbulatorio"));
                 observacao.setIdPaciente(rs.getInt("idPaciente"));
                 lista.add(observacao);
