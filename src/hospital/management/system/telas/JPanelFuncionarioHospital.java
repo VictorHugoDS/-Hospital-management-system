@@ -263,7 +263,13 @@ public class JPanelFuncionarioHospital extends javax.swing.JPanel {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         FuncionarioHospital funcionario = new FuncionarioHospital();
         
-        funcionario.setId(Integer.parseInt(jTextFieldId.getText()));
+        int id = 0;
+        try {
+        id = Integer.parseInt(jTextFieldId.getText());
+        } catch(NumberFormatException ex) {
+            id = 0;
+        }
+        funcionario.setId(id);
         funcionario.setNome(jTextFieldNome.getText());
         funcionario.setFuncao(jTextFieldFuncao.getText());
         funcionario.setCpf(jTextFieldCpf.getText());

@@ -1,5 +1,5 @@
 
-package hospital.management.system.persistencia.postgresql;
+package hospital.management.system.persistencia.mysql;
 
 import hospital.management.system.entidades.Ambulatorio;
 import hospital.management.system.persistencia.AmbulatorioDAO;
@@ -14,15 +14,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class AmbulatorioDAOPostgreSQL implements AmbulatorioDAO{
+public class AmbulatorioDAOMySQL implements AmbulatorioDAO{
     
     private Connection conexao;
     
     private void abrirConexao() {
         try {
-            conexao = DriverManager.getConnection("jdbc:postgresql://", "postgre", "");
+            String className = "com.mysql.cj.jdbc.Driver";
+            Class.forName(className);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AmbulatorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","root");
         } catch (SQLException ex) {
-            Logger.getLogger(AmbulatorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AmbulatorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -30,7 +36,7 @@ public class AmbulatorioDAOPostgreSQL implements AmbulatorioDAO{
         try {
             conexao.close();
         } catch (SQLException ex) {
-            Logger.getLogger(AmbulatorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AmbulatorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -49,7 +55,7 @@ public class AmbulatorioDAOPostgreSQL implements AmbulatorioDAO{
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(AmbulatorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AmbulatorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -68,7 +74,7 @@ public class AmbulatorioDAOPostgreSQL implements AmbulatorioDAO{
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(AmbulatorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AmbulatorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -77,7 +83,7 @@ public class AmbulatorioDAOPostgreSQL implements AmbulatorioDAO{
         try {
             abrirConexao();
             
-            String sql = "DELETE FROM ambulatorio WHERE id = " + id + ";";
+            String sql = "DELETE FROM ambulatorio WHERE id = " + id;
             
             conexao.createStatement().executeUpdate(sql);
             
@@ -85,7 +91,7 @@ public class AmbulatorioDAOPostgreSQL implements AmbulatorioDAO{
             
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(AmbulatorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AmbulatorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -96,7 +102,7 @@ public class AmbulatorioDAOPostgreSQL implements AmbulatorioDAO{
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM ambulatorio WHERE id = " + id + ";";
+            String sql = "SELECT * FROM ambulatorio WHERE id = " + id;
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
@@ -108,7 +114,7 @@ public class AmbulatorioDAOPostgreSQL implements AmbulatorioDAO{
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(AmbulatorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AmbulatorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ambulatorio;
     }
@@ -119,19 +125,20 @@ public class AmbulatorioDAOPostgreSQL implements AmbulatorioDAO{
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM ambulatorio;";
+            String sql = "SELECT * FROM ambulatorio";
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
-            if (rs.next()) {
+            while (rs.next()) {
                 Ambulatorio ambulatorio = new Ambulatorio();
+                ambulatorio.setId(rs.getInt("id"));
                 ambulatorio.setNumero(rs.getInt("numero"));
                 lista.add(ambulatorio);
             }
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(AmbulatorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AmbulatorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }

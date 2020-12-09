@@ -1,4 +1,4 @@
-package hospital.management.system.persistencia.postgresql;
+package hospital.management.system.persistencia.mysql;
 
 import hospital.management.system.entidades.FuncionarioHospital;
 import hospital.management.system.persistencia.FuncionarioHospitalDAO;
@@ -12,15 +12,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO {
+public class FuncionarioHospitalDAOMySQL implements FuncionarioHospitalDAO {
     
     private Connection conexao;
     
     private void abrirConexao() {
         try {
-            conexao = DriverManager.getConnection("jdbc:postgresql://", "postgre", "");
+            String className = "com.mysql.cj.jdbc.Driver";
+            Class.forName(className);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FuncionarioHospitalDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","root");
         } catch (SQLException ex) {
-            Logger.getLogger(FuncionarioHospitalDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FuncionarioHospitalDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -28,7 +34,7 @@ public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO 
         try {
             conexao.close();
         } catch (SQLException ex) {
-            Logger.getLogger(FuncionarioHospitalDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FuncionarioHospitalDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -37,7 +43,7 @@ public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO 
         try {
             abrirConexao();
             
-            String sql = "INSERT INTO funcionarioHospital (nome, cpf, telefone, funcao, horario, salario) VALUES ('?', '?', '?', '?', '?', ?);";
+            String sql = "INSERT INTO funcionarioHospital (nome, cpf, telefone, funcao, horario, salario) VALUES (?, ?, ?, ?, ?, ?);";
             
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
@@ -52,7 +58,7 @@ public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO 
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(FuncionarioHospitalDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FuncionarioHospitalDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -61,7 +67,7 @@ public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO 
         try {
             abrirConexao();
             
-            String sql = "UPDATE funcionarioHospitalSET nome = ?, cpf = ?, telefone = ?, funcao = ?, horario = ?, salario = ? WHERE  id = ?;";
+            String sql = "UPDATE funcionarioHospitalSET nome = ?, cpf = ?, telefone = ?, funcao = ?, horario = ?, salario = ? WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, funcionarioHospital.getNome());
@@ -76,7 +82,7 @@ public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO 
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(FuncionarioHospitalDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FuncionarioHospitalDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -85,7 +91,7 @@ public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO 
         try {
             abrirConexao();
             
-            String sql = "DELETE FROM funcionarioHospital WHERE id = " + id + ";";
+            String sql = "DELETE FROM funcionarioHospital WHERE id = " + id;
             
             conexao.createStatement().executeUpdate(sql);
             
@@ -93,7 +99,7 @@ public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO 
             
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(FuncionarioHospitalDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FuncionarioHospitalDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -104,7 +110,7 @@ public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO 
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM funcionarioHospital WHERE id = " + id + ";";
+            String sql = "SELECT * FROM funcionarioHospital WHERE id = " + id;
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
@@ -121,7 +127,7 @@ public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO 
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(FuncionarioHospitalDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FuncionarioHospitalDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return funcionarioHospital;
     }
@@ -132,11 +138,11 @@ public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO 
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM funcionarioHospital;";
+            String sql = "SELECT * FROM funcionarioHospital";
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
-            if (rs.next()) {
+            while (rs.next()) {
                 FuncionarioHospital funcionarioHospital = new FuncionarioHospital();
                 funcionarioHospital.setId(rs.getInt("id"));
                 funcionarioHospital.setNome(rs.getString("nome"));
@@ -150,7 +156,7 @@ public class FuncionarioHospitalDAOPostgreSQL implements FuncionarioHospitalDAO 
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(FuncionarioHospitalDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FuncionarioHospitalDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }

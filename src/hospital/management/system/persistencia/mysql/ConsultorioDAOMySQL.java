@@ -1,4 +1,4 @@
-package hospital.management.system.persistencia.postgresql;
+package hospital.management.system.persistencia.mysql;
 
 import hospital.management.system.entidades.Consultorio;
 import hospital.management.system.persistencia.ConsultorioDAO;
@@ -12,15 +12,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
+public class ConsultorioDAOMySQL implements ConsultorioDAO {
     
     private Connection conexao;
     
     private void abrirConexao() {
         try {
-            conexao = DriverManager.getConnection("jdbc:postgresql://", "postgre", "");
+            String className = "com.mysql.cj.jdbc.Driver";
+            Class.forName(className);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConsultorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","root");
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -28,7 +34,7 @@ public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
         try {
             conexao.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -37,7 +43,7 @@ public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
         try {
             abrirConexao();
             
-            String sql = "INSERT INTO consultorio (numero, tipo) VALUES (?, '?');";
+            String sql = "INSERT INTO consultorio (numero, tipo) VALUES (?, ?);";
             
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
@@ -48,7 +54,7 @@ public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -57,7 +63,7 @@ public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE consultorio SET numero = ?, tipo = ? WHERE  id = ?;";
+            String sql = "UPDATE consultorio SET numero = ?, tipo = ? WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setInt(1, consultorio.getNumero());
@@ -68,7 +74,7 @@ public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -77,7 +83,7 @@ public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
         try {
             abrirConexao();
             
-            String sql = "DELETE FROM consultorio WHERE id = " + id + ";";
+            String sql = "DELETE FROM consultorio WHERE id = " + id;
             
             conexao.createStatement().executeUpdate(sql);
             
@@ -85,7 +91,7 @@ public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
             
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -96,7 +102,7 @@ public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM consultorio WHERE id = " + id + ";";
+            String sql = "SELECT * FROM consultorio WHERE id = " + id;
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
@@ -109,7 +115,7 @@ public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return consultorio;
     }
@@ -120,12 +126,13 @@ public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM consultorio;";
+            String sql = "SELECT * FROM consultorio";
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
-            if (rs.next()) {
+            while (rs.next()) {
                 Consultorio consultorio = new Consultorio();
+                consultorio.setId(rs.getInt("id"));
                 consultorio.setNumero(rs.getInt("numero"));
                 consultorio.setTipo(rs.getString("tipo"));
                 lista.add(consultorio);
@@ -133,7 +140,7 @@ public class ConsultorioDAOPostgreSQL implements ConsultorioDAO {
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultorioDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultorioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }

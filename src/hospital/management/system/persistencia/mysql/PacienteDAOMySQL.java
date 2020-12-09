@@ -1,4 +1,4 @@
-package hospital.management.system.persistencia.postgresql;
+package hospital.management.system.persistencia.mysql;
 
 import hospital.management.system.entidades.Paciente;
 import hospital.management.system.persistencia.PacienteDAO;
@@ -12,15 +12,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PacienteDAOPostgreSQL implements PacienteDAO {
+public class PacienteDAOMySQL implements PacienteDAO {
     
     private Connection conexao;
     
     private void abrirConexao() {
         try {
-            conexao = DriverManager.getConnection("jdbc:postgresql://", "postgre", "");
+            String className = "com.mysql.cj.jdbc.Driver";
+            Class.forName(className);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PacienteDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","root");
         } catch (SQLException ex) {
-            Logger.getLogger(PacienteDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PacienteDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -28,7 +34,7 @@ public class PacienteDAOPostgreSQL implements PacienteDAO {
         try {
             conexao.close();
         } catch (SQLException ex) {
-            Logger.getLogger(PacienteDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PacienteDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -37,21 +43,21 @@ public class PacienteDAOPostgreSQL implements PacienteDAO {
         try {
             abrirConexao();
             
-            String sql = "INSERT INTO paciente (nome, cpf, endereco, telefone, convenio) VALUES ('?', '?', '?', '?', '?');";
+            String sql = "INSERT INTO paciente (nome, cpf, endereco, telefone, convenio) VALUES (?, ?, ?, ?, ?);";
             
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, paciente.getNome());
             pstm.setString(2, paciente.getCpf());
-            pstm.setString(2, paciente.getEndereco());
-            pstm.setString(3, paciente.getTelefone());
-            pstm.setString(4, paciente.getConvenio());
+            pstm.setString(3, paciente.getEndereco());
+            pstm.setString(4, paciente.getTelefone());
+            pstm.setString(5, paciente.getConvenio());
             
             pstm.execute();
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(PacienteDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PacienteDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -60,7 +66,7 @@ public class PacienteDAOPostgreSQL implements PacienteDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE pacienteSET nome = ?, cpf = ?, endereco = ?, telefone = ?, convenio = ? WHERE  id = ?;";
+            String sql = "UPDATE pacienteSET nome = ?, cpf = ?, endereco = ?, telefone = ?, convenio = ? WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, paciente.getNome());
@@ -74,7 +80,7 @@ public class PacienteDAOPostgreSQL implements PacienteDAO {
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(PacienteDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PacienteDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,7 +89,7 @@ public class PacienteDAOPostgreSQL implements PacienteDAO {
         try {
             abrirConexao();
             
-            String sql = "DELETE FROM paciente WHERE id = " + id + ";";
+            String sql = "DELETE FROM paciente WHERE id = " + id;
             
             conexao.createStatement().executeUpdate(sql);
             
@@ -91,7 +97,7 @@ public class PacienteDAOPostgreSQL implements PacienteDAO {
             
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(PacienteDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PacienteDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -102,7 +108,7 @@ public class PacienteDAOPostgreSQL implements PacienteDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM paciente WHERE id = " + id + ";";
+            String sql = "SELECT * FROM paciente WHERE id = " + id;
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
@@ -118,7 +124,7 @@ public class PacienteDAOPostgreSQL implements PacienteDAO {
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(PacienteDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PacienteDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return paciente;
     }
@@ -129,11 +135,11 @@ public class PacienteDAOPostgreSQL implements PacienteDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM paciente;";
+            String sql = "SELECT * FROM paciente";
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
-            if (rs.next()) {
+            while (rs.next()) {
                 Paciente paciente = new Paciente();
                 paciente.setId(rs.getInt("id"));
                 paciente.setNome(rs.getString("nome"));
@@ -141,11 +147,12 @@ public class PacienteDAOPostgreSQL implements PacienteDAO {
                 paciente.setEndereco(rs.getString("endereco"));
                 paciente.setTelefone(rs.getString("telefone"));
                 paciente.setConvenio(rs.getString("convenio"));
+                lista.add(paciente);
             }
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(PacienteDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PacienteDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }

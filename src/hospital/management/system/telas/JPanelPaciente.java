@@ -26,7 +26,7 @@ public class JPanelPaciente extends javax.swing.JPanel {
     }
     
     public void carregarTabela() {
-        List<Paciente> medicos = pacienteDAO.listar();
+        List<Paciente> pacientes = pacienteDAO.listar();
         DefaultTableModel modeloTabela = (DefaultTableModel) jTable.getModel();
         int qntLinhas = modeloTabela.getRowCount();
         
@@ -35,14 +35,14 @@ public class JPanelPaciente extends javax.swing.JPanel {
             modeloTabela.removeRow(0);
         }
         
-        for (Paciente medico: medicos) {
+        for (Paciente paciente: pacientes) {
             Object[] linha = new Object[6];
-            linha[0] = medico.getId();
-            linha[1] = medico.getNome();
-            linha[2] = medico.getCpf();
-            linha[3] = medico.getEndereco();
-            linha[4] = medico.getTelefone();
-            linha[5] = medico.getConvenio();
+            linha[0] = paciente.getId();
+            linha[1] = paciente.getNome();
+            linha[2] = paciente.getCpf();
+            linha[3] = paciente.getEndereco();
+            linha[4] = paciente.getTelefone();
+            linha[5] = paciente.getConvenio();
             
             modeloTabela.addRow(linha);
         }
@@ -119,11 +119,11 @@ public class JPanelPaciente extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nome", "CPF", "Telefone", "Endereço", "Convênio", "Título 6"
+                "ID", "Nome", "CPF", "Telefone", "Endereço", "Convênio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -134,6 +134,7 @@ public class JPanelPaciente extends javax.swing.JPanel {
 
         jLabelId.setText("ID:");
 
+        jTextFieldId.setEditable(false);
         jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdActionPerformed(evt);
@@ -230,7 +231,13 @@ public class JPanelPaciente extends javax.swing.JPanel {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         Paciente paciente = new Paciente();
         
-        paciente.setId(Integer.parseInt(jTextFieldId.getText()));
+        int id = 0;
+        try {
+        id = Integer.parseInt(jTextFieldId.getText());
+        } catch(NumberFormatException ex) {
+            id = 0;
+        }
+        paciente.setId(id);
         paciente.setNome(jTextFieldNome.getText());
         paciente.setCpf(jTextFieldCpf.getText());
         paciente.setEndereco(jTextFieldEndereco.getText());

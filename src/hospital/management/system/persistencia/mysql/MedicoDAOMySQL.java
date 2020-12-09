@@ -1,4 +1,4 @@
-package hospital.management.system.persistencia.postgresql;
+package hospital.management.system.persistencia.mysql;
 
 import hospital.management.system.entidades.Medico;
 import hospital.management.system.persistencia.MedicoDAO;
@@ -12,15 +12,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MedicoDAOPostgreSQL implements MedicoDAO {
+public class MedicoDAOMySQL implements MedicoDAO {
     
     private Connection conexao;
     
     private void abrirConexao() {
         try {
-            conexao = DriverManager.getConnection("jdbc:postgresql://", "postgre", "");
+            String className = "com.mysql.cj.jdbc.Driver";
+            Class.forName(className);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MedicoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","root");
         } catch (SQLException ex) {
-            Logger.getLogger(MedicoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MedicoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -28,7 +34,7 @@ public class MedicoDAOPostgreSQL implements MedicoDAO {
         try {
             conexao.close();
         } catch (SQLException ex) {
-            Logger.getLogger(MedicoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MedicoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -37,7 +43,7 @@ public class MedicoDAOPostgreSQL implements MedicoDAO {
         try {
             abrirConexao();
             
-            String sql = "INSERT INTO medico (nome, cpf, telefone, funcao, horario, salario, crm, especialidade, horarioPlantao) VALUES ('?', '?', '?', '?', '?', ?, ?, '?', '?');";
+            String sql = "INSERT INTO medico (nome, cpf, telefone, funcao, horario, salario, crm, especialidade, horarioPlantao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
             
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
@@ -55,7 +61,7 @@ public class MedicoDAOPostgreSQL implements MedicoDAO {
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(MedicoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MedicoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -64,7 +70,7 @@ public class MedicoDAOPostgreSQL implements MedicoDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE medicoSET nome = ?, cpf = ?, telefone = ?, funcao = ?, horario = ?, salario = ?, crm = ?, especialidade = ?, horarioPlantao = ? WHERE  id = ?;";
+            String sql = "UPDATE medicoSET nome = ?, cpf = ?, telefone = ?, funcao = ?, horario = ?, salario = ?, crm = ?, especialidade = ?, horarioPlantao = ? WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, medico.getNome());
@@ -82,7 +88,7 @@ public class MedicoDAOPostgreSQL implements MedicoDAO {
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(MedicoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MedicoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -91,7 +97,7 @@ public class MedicoDAOPostgreSQL implements MedicoDAO {
         try {
             abrirConexao();
             
-            String sql = "DELETE FROM medico WHERE id = " + id + ";";
+            String sql = "DELETE FROM medico WHERE id = " + id;
             
             conexao.createStatement().executeUpdate(sql);
             
@@ -99,7 +105,7 @@ public class MedicoDAOPostgreSQL implements MedicoDAO {
             
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(MedicoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MedicoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -110,7 +116,7 @@ public class MedicoDAOPostgreSQL implements MedicoDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM medico WHERE id = " + id + ";";
+            String sql = "SELECT * FROM medico WHERE id = " + id;
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
@@ -130,7 +136,7 @@ public class MedicoDAOPostgreSQL implements MedicoDAO {
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(MedicoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MedicoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return medico;
     }
@@ -141,11 +147,11 @@ public class MedicoDAOPostgreSQL implements MedicoDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM medico;";
+            String sql = "SELECT * FROM medico";
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
-            if (rs.next()) {
+            while (rs.next()) {
                 Medico medico = new Medico();
                 medico.setId(rs.getInt("id"));
                 medico.setNome(rs.getString("nome"));
@@ -162,7 +168,7 @@ public class MedicoDAOPostgreSQL implements MedicoDAO {
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(MedicoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MedicoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }

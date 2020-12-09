@@ -152,6 +152,7 @@ public class JPanelConsulta extends javax.swing.JPanel {
 
         jLabelId.setText("Id:");
 
+        jTextFieldId.setEditable(false);
         jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdActionPerformed(evt);
@@ -448,9 +449,15 @@ public class JPanelConsulta extends javax.swing.JPanel {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         Consulta consulta = new Consulta();
-        int linhaP,linhaM,linhaC,id;
+        int linhaP,linhaM,linhaC;
         
-        consulta.setId(Integer.parseInt(jTextFieldId.getText()));
+        int id = 0;
+        try {
+        id = Integer.parseInt(jTextFieldId.getText());
+        } catch(NumberFormatException ex) {
+            id = 0;
+        }
+        consulta.setId(id);
         consulta.setTratamento(jTextAreaTratamento.getText());
         consulta.setRelatorioPaciente(jTextAreaRelatorio.getText());
         consulta.setPeriodoDeExames(jTextFieldPeriodo.getText());

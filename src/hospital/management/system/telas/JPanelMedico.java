@@ -94,6 +94,8 @@ public class JPanelMedico extends javax.swing.JPanel {
 
         jLabelId.setText("ID:");
 
+        jTextFieldId.setEditable(false);
+
         jLabelCpf.setText("CPF:");
 
         jTextFieldCpf.addActionListener(new java.awt.event.ActionListener() {
@@ -292,7 +294,13 @@ public class JPanelMedico extends javax.swing.JPanel {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         Medico medico = new Medico();
         
-        medico.setId(Integer.parseInt(jTextFieldId.getText()));
+        int id = 0;
+        try {
+        id = Integer.parseInt(jTextFieldId.getText());
+        } catch(NumberFormatException ex) {
+            id = 0;
+        }
+        medico.setId(id);
         medico.setNome(jTextFieldNome.getText());
         medico.setFuncao(jTextFieldFuncao.getText());
         medico.setCpf(jTextFieldCpf.getText());

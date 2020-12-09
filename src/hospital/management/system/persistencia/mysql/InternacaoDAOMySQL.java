@@ -1,4 +1,4 @@
-package hospital.management.system.persistencia.postgresql;
+package hospital.management.system.persistencia.mysql;
 
 import hospital.management.system.entidades.Internacao;
 import hospital.management.system.persistencia.InternacaoDAO;
@@ -12,15 +12,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class InternacaoDAOPostgreSQL implements InternacaoDAO {
+public class InternacaoDAOMySQL implements InternacaoDAO {
     
      private Connection conexao;
     
     private void abrirConexao() {
         try {
-            conexao = DriverManager.getConnection("jdbc:postgresql://", "postgre", "");
+            String className = "com.mysql.cj.jdbc.Driver";
+            Class.forName(className);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InternacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","root");
         } catch (SQLException ex) {
-            Logger.getLogger(InternacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -28,7 +34,7 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
         try {
             conexao.close();
         } catch (SQLException ex) {
-            Logger.getLogger(InternacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -37,7 +43,7 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "INSERT INTO internacao (medicacao, dataEntrada, dataSaida, horarioEntrada, horarioSaida, idLeito, idPaciente ) VALUES ('?','?','?','?','?',?,?);";
+            String sql = "INSERT INTO internacao (medicacao, dataEntrada, dataSaida, horarioEntrada, horarioSaida, idLeito, idPaciente ) VALUES (?,?,?,?,?,?,?)";
             
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
@@ -53,7 +59,7 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(InternacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -62,7 +68,7 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE internacao SET medicacao = ?, dataEntrada = ?, dataSaida = ?,horarioEntrada = ?,horarioSaida = ?, idLeito = ?, idPaciente = ?  WHERE  id = ?;";
+            String sql = "UPDATE internacao SET medicacao = ?, dataEntrada = ?, dataSaida = ?,horarioEntrada = ?,horarioSaida = ?, idLeito = ?, idPaciente = ?  WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, internacao.getMedicacao());
@@ -77,7 +83,7 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(InternacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -86,7 +92,7 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "DELETE FROM internacao WHERE id = " + id + ";";
+            String sql = "DELETE FROM internacao WHERE id = " + id;
             
             conexao.createStatement().executeUpdate(sql);
             
@@ -94,7 +100,7 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
             
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(InternacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -105,7 +111,7 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM internacao WHERE id = " + id + ";";
+            String sql = "SELECT * FROM internacao WHERE id = " + id;
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
@@ -123,7 +129,7 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(InternacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return internacao;
     }
@@ -134,12 +140,13 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM internacao;";
+            String sql = "SELECT * FROM internacao";
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
-            if (rs.next()) {
+            while (rs.next()) {
                 Internacao internacao = new Internacao();
+                internacao.setId(rs.getInt("id"));
                 internacao.setMedicacao(rs.getString("medicacao"));
                 internacao.setDataEntrada(rs.getString("dataEntrada"));
                 internacao.setDataSaida(rs.getString("dataSaida"));
@@ -152,7 +159,7 @@ public class InternacaoDAOPostgreSQL implements InternacaoDAO {
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(InternacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }

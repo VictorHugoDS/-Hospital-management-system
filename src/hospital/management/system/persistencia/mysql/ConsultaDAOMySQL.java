@@ -1,5 +1,5 @@
 
-package hospital.management.system.persistencia.postgresql;
+package hospital.management.system.persistencia.mysql;
 
 import hospital.management.system.entidades.Consulta;
 import hospital.management.system.persistencia.ConsultaDAO;
@@ -13,15 +13,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ConsultaDAOPostgreSQL implements ConsultaDAO {
+public class ConsultaDAOMySQL implements ConsultaDAO {
     
      private Connection conexao;
     
     private void abrirConexao() {
         try {
-            conexao = DriverManager.getConnection("jdbc:postgresql://", "postgre", "");
+            String className = "com.mysql.cj.jdbc.Driver";
+            Class.forName(className);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConsultaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","root");
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -29,7 +35,7 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
         try {
             conexao.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -38,7 +44,7 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
         try {
             abrirConexao();
             
-            String sql = "INSERT INTO consulta (relatorioPaciente, tratamento, periodoDeExames, idMedico, idPaciente, idConsultorio) VALUES ('?', '?', '?', ?, ?, ?);";
+            String sql = "INSERT INTO consulta (relatorioPaciente, tratamento, periodoDeExames, idMedico, idPaciente, idConsultorio) VALUES (?, ?, ?, ?, ?, ?);";
             
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
@@ -53,7 +59,7 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -76,7 +82,7 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -85,7 +91,7 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
         try {
             abrirConexao();
             
-            String sql = "DELETE FROM consulta WHERE id = " + id + ";";
+            String sql = "DELETE FROM consulta WHERE id = " + id;
             
             conexao.createStatement().executeUpdate(sql);
             
@@ -93,7 +99,7 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
             
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -104,7 +110,7 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM consulta WHERE id = " + id + ";";
+            String sql = "SELECT * FROM consulta WHERE id = " + id;
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
@@ -121,7 +127,7 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return consulta;
     }
@@ -132,12 +138,13 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM consulta;";
+            String sql = "SELECT * FROM consulta";
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
-            if (rs.next()) {
+            while (rs.next()) {
                 Consulta consulta = new Consulta();
+                consulta.setId(rs.getInt("id"));
                 consulta.setRelatorioPaciente(rs.getString("relatorioPaciente"));
                 consulta.setPeriodoDeExames(rs.getString("periodoDeExames"));
                 consulta.setTratamento(rs.getString("tratamento"));
@@ -149,7 +156,7 @@ public class ConsultaDAOPostgreSQL implements ConsultaDAO {
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }
