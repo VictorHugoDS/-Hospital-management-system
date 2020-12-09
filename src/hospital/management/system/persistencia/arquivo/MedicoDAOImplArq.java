@@ -98,7 +98,7 @@ public class MedicoDAOImplArq implements MedicoDAO {
     @Override
     public Medico getById(int id) {
         int i, tamanho;
-
+        carregaArquivo();
         tamanho = medicos.size();
         i = 0;
         while (i < tamanho && medicos.get(i).getId() != id) {

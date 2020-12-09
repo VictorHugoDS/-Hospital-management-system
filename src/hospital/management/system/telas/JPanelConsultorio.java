@@ -54,7 +54,6 @@ public class JPanelConsultorio extends javax.swing.JPanel {
 
         jLabel2.setText("Tipo:");
 
-        jTextFieldId.setEditable(false);
         jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdActionPerformed(evt);

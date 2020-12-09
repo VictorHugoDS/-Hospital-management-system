@@ -124,7 +124,6 @@ public class JPanelLeito extends javax.swing.JPanel {
 
         jLabelId.setText("Id:");
 
-        jTextFieldId.setEditable(false);
         jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdActionPerformed(evt);

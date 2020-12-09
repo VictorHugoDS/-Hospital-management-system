@@ -98,7 +98,7 @@ public class ConsultorioDAOImplArq implements ConsultorioDAO {
     @Override
     public Consultorio getById(int id) {
         int i, tamanho;
-
+        carregaArquivo();
         tamanho = consultorios.size();
         i = 0;
         while (i < tamanho && consultorios.get(i).getId() != id) {

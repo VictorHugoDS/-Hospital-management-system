@@ -1,37 +1,37 @@
 package hospital.management.system.utils;
 
 import hospital.management.system.persistencia.*;
-import hospital.management.system.persistencia.postgresql.*;
+import hospital.management.system.persistencia.arquivo.*;
 
 public class DAOFactory {
     public static ConsultorioDAO createConsultorioDAO() {
-        return new ConsultorioDAOPostgreSQL();
+        return new ConsultorioDAOImplArq();
     }
     public static FuncionarioHospitalDAO createFuncionarioHospitalDAO() {
-        return new FuncionarioHospitalDAOPostgreSQL();
+        return new FuncionarioHospitalDAOImplArq();
     }
     public static EnfermeiroDAO createEnfermeiroDAO() {
-        return new EnfermeiroDAOPostgreSQL();
+        return new EnfermeiroDAOImplArq();
     }
     public static MedicoDAO createMedicoDAO() {
-        return new MedicoDAOPostgreSQL();
+        return new MedicoDAOImplArq();
     }
     public static PacienteDAO createPacienteDAO() {
-        return new PacienteDAOPostgreSQL();
+        return new PacienteDAOImplArq();
     }
     public static LeitoDAO createLeitoDAO() {
-        return new LeitoDAOPostgreSQL();
+        return new LeitoDAOImplArq();
     }
     public static ConsultaDAO createConsultaDAO() {
-        return new ConsultaDAOPostgreSQL();
+        return new ConsultaDAOImplArq();
     }
     public static InternacaoDAO createInternacaoDAO() {
-        return new InternacaoDAOPostgreSQL();
+        return new InternacaoDAOImplArq();
     }
     public static ObservacaoDAO createObservacaoDAO() {
-        return new ObservacaoDAOPostgreSQL();
+        return new ObservacaoDAOImplArq();
     }
     public static AmbulatorioDAO createAmbulatorioDAO() {
-        return new AmbulatorioDAOPostgreSQL();
+        return new AmbulatorioDAOImplArq();
     }
 }

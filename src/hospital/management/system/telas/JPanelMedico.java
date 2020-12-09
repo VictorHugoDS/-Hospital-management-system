@@ -94,8 +94,6 @@ public class JPanelMedico extends javax.swing.JPanel {
 
         jLabelId.setText("ID:");
 
-        jTextFieldId.setEditable(false);
-
         jLabelCpf.setText("CPF:");
 
         jTextFieldCpf.addActionListener(new java.awt.event.ActionListener() {

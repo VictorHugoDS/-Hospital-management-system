@@ -119,11 +119,11 @@ public class JPanelPaciente extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nome", "CPF", "Telefone", "Endereço", "Convênio"
+                "Nome", "CPF", "Telefone", "Endereço", "Convênio", "Título 6"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -134,7 +134,6 @@ public class JPanelPaciente extends javax.swing.JPanel {
 
         jLabelId.setText("ID:");
 
-        jTextFieldId.setEditable(false);
         jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdActionPerformed(evt);

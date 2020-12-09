@@ -97,6 +97,7 @@ public class PacienteDAOImplArq implements PacienteDAO {
     @Override
     public Paciente getById(int id) {
         int i, tamanho;
+        carregaArquivo();
 
         tamanho = pacientes.size();
         i = 0;

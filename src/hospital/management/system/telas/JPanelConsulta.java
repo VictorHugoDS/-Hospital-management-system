@@ -6,28 +6,37 @@
 package hospital.management.system.telas;
 
 import hospital.management.system.entidades.Consulta;
+import hospital.management.system.entidades.Consultorio;
+import hospital.management.system.entidades.Medico;
+import hospital.management.system.entidades.Paciente;
 import hospital.management.system.persistencia.ConsultaDAO;
-import hospital.management.system.persistencia.arquivo.ConsultaDAOImplArq;
+import hospital.management.system.persistencia.ConsultorioDAO;
+import hospital.management.system.persistencia.MedicoDAO;
+import hospital.management.system.persistencia.PacienteDAO;
+import hospital.management.system.utils.DAOFactory;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author rener
- */
 public class JPanelConsulta extends javax.swing.JPanel {
-    ConsultaDAO consultadao = new ConsultaDAOImplArq();
+    ConsultaDAO consultaDAO = DAOFactory.createConsultaDAO();
+    PacienteDAO pacienteDAO = DAOFactory.createPacienteDAO();
+    MedicoDAO medicoDAO = DAOFactory.createMedicoDAO();
+    ConsultorioDAO consultorioDAO = DAOFactory.createConsultorioDAO();
+    
     /**
      * Creates new form JPanelConsulta
      */
     public JPanelConsulta() {
         initComponents();
-        carregarTabela();
+        carregarTabelaConsulta();
+        carregarTabelaConsultorio();
+        carregarTabelaMedico();
+        carregarTabelaPaciente();
     }
 
-        private void carregarTabela(){
-        List<Consulta> consultas = consultadao.listar();
-        DefaultTableModel modeloTabela = (DefaultTableModel) jTable.getModel();
+    private void carregarTabelaConsulta(){
+        List<Consulta> consultas = consultaDAO.listar();
+        DefaultTableModel modeloTabela = (DefaultTableModel) jTableConsulta.getModel();
         int qntLinhas = modeloTabela.getRowCount();
         
         
@@ -35,14 +44,76 @@ public class JPanelConsulta extends javax.swing.JPanel {
             modeloTabela.removeRow(0);
         }
         for (Consulta consulta: consultas){
-          Object[] linha = new Object[3];
+          Object[] linha = new Object[9];
           linha[0]= consulta.getId();
           linha[1]= consulta.getPeriodoDeExames();
           linha[2]= consulta.getTratamento();
+          linha[3]= consulta.getIdPaciente();
+          linha[4]= pacienteDAO.getById(consulta.getIdPaciente()).getNome();
+          linha[5]= consulta.getIdMedico();
+          linha[6]= medicoDAO.getById(consulta.getIdMedico()).getNome();
+          linha[7]= consulta.getIdConsultorio();
+          linha[8]= consultorioDAO.getById(consulta.getIdConsultorio()).getNumero();
           
           modeloTabela.addRow(linha);
         }
     }
+        
+    public void carregarTabelaPaciente() {
+        List<Paciente> medicos = pacienteDAO.listar();
+        DefaultTableModel modeloTabela = (DefaultTableModel) jTablePaciente.getModel();
+        int qntLinhas = modeloTabela.getRowCount();
+        
+        
+        for (int i = 0; i < qntLinhas; i++) {
+            modeloTabela.removeRow(0);
+        }
+        
+        for (Paciente medico: medicos) {
+            Object[] linha = new Object[2];
+            linha[0] = medico.getId();
+            linha[1] = medico.getNome();
+            
+            modeloTabela.addRow(linha);
+        }
+    }
+    
+    public void carregarTabelaMedico() {
+        List<Medico> medicos = medicoDAO.listar();
+        DefaultTableModel modeloTabela = (DefaultTableModel) jTableMedico.getModel();
+        int qntLinhas = modeloTabela.getRowCount();
+        
+        
+        for (int i = 0; i < qntLinhas; i++) {
+            modeloTabela.removeRow(0);
+        }
+        
+        for (Medico medico: medicos) {
+            Object[] linha = new Object[2];
+            linha[0] = medico.getId();
+            linha[1] = medico.getNome();
+            
+            modeloTabela.addRow(linha);
+        }
+    }
+    
+    public void carregarTabelaConsultorio() {
+        List<Consultorio> consultorios = consultorioDAO.listar();
+        DefaultTableModel modeloTabela = (DefaultTableModel) jTableConsultorio.getModel();
+        //Remocao das linhas atuais da tabela para atualizacao
+        int qntdLinhas = modeloTabela.getRowCount();
+        for (int i = 0; i < qntdLinhas; i++) {
+            modeloTabela.removeRow(0);
+        }   
+        
+        for (Consultorio consultorio: consultorios) {
+            Object[] linha = new Object[2];
+            linha[0] = consultorio.getId();
+            linha[1] = consultorio.getNumero();
+            modeloTabela.addRow(linha);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,22 +127,31 @@ public class JPanelConsulta extends javax.swing.JPanel {
         jTextFieldId = new javax.swing.JTextField();
         jLabelRelatorio = new javax.swing.JLabel();
         jLabelTratamento = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextAreaTratamento = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextAreaRelatorio = new javax.swing.JTextArea();
         jLabelPeriodo = new javax.swing.JLabel();
         jTextFieldPeriodo = new javax.swing.JTextField();
         jButtonLimpar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable = new javax.swing.JTable();
+        jTableConsulta = new javax.swing.JTable();
         jButtonExcluir = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextAreaRelatorio = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextAreaTratamento = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTablePaciente = new javax.swing.JTable();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTableMedico = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTableConsultorio = new javax.swing.JTable();
+        jLabelMedico = new javax.swing.JLabel();
+        jLabelConsultorio = new javax.swing.JLabel();
+        jButtonAtualizarTabelas = new javax.swing.JButton();
 
         jLabelId.setText("Id:");
 
-        jTextFieldId.setEditable(false);
         jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdActionPerformed(evt);
@@ -81,14 +161,6 @@ public class JPanelConsulta extends javax.swing.JPanel {
         jLabelRelatorio.setText("Relatório:");
 
         jLabelTratamento.setText("Tratamento");
-
-        jTextAreaTratamento.setColumns(20);
-        jTextAreaTratamento.setRows(5);
-        jScrollPane3.setViewportView(jTextAreaTratamento);
-
-        jTextAreaRelatorio.setColumns(20);
-        jTextAreaRelatorio.setRows(5);
-        jScrollPane4.setViewportView(jTextAreaRelatorio);
 
         jLabelPeriodo.setText("Período  de exames");
 
@@ -105,30 +177,42 @@ public class JPanelConsulta extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonSalvarActionPerformed(evt);
             }
         });
 
-        jTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTableConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Período de exames", "Tratamento"
+                "Id", "Período de exames", "Tratamento", "ID Paciente", "Paciente", "ID Médico", "Médico", "ID Consultorio", "Consultorio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable);
+        jTableConsulta.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTableConsulta);
+        if (jTableConsulta.getColumnModel().getColumnCount() > 0) {
+            jTableConsulta.getColumnModel().getColumn(0).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(1).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(2).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(3).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(4).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(5).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(6).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(7).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(8).setResizable(false);
+        }
 
         jButtonExcluir.setText("Excluir");
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -144,74 +228,206 @@ public class JPanelConsulta extends javax.swing.JPanel {
             }
         });
 
+        jTextAreaRelatorio.setColumns(20);
+        jTextAreaRelatorio.setRows(5);
+        jScrollPane3.setViewportView(jTextAreaRelatorio);
+
+        jTextAreaTratamento.setColumns(20);
+        jTextAreaTratamento.setRows(5);
+        jScrollPane4.setViewportView(jTextAreaTratamento);
+
+        jTablePaciente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nome"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTablePaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTablePaciente.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(jTablePaciente);
+        if (jTablePaciente.getColumnModel().getColumnCount() > 0) {
+            jTablePaciente.getColumnModel().getColumn(0).setResizable(false);
+            jTablePaciente.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jTableMedico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nome"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableMedico.getTableHeader().setReorderingAllowed(false);
+        jScrollPane7.setViewportView(jTableMedico);
+        if (jTableMedico.getColumnModel().getColumnCount() > 0) {
+            jTableMedico.getColumnModel().getColumn(0).setResizable(false);
+            jTableMedico.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jLabel1.setText("Paciente");
+
+        jTableConsultorio.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Número"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableConsultorio.getTableHeader().setReorderingAllowed(false);
+        jScrollPane8.setViewportView(jTableConsultorio);
+        if (jTableConsultorio.getColumnModel().getColumnCount() > 0) {
+            jTableConsultorio.getColumnModel().getColumn(0).setResizable(false);
+            jTableConsultorio.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jLabelMedico.setText("Médico");
+
+        jLabelConsultorio.setText("Consultório");
+
+        jButtonAtualizarTabelas.setText("Atualizar Tabelas");
+        jButtonAtualizarTabelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarTabelasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldId)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabelPeriodo)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonExcluir)
+                            .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelRelatorio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonLimpar))
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabelTratamento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3)))
-                .addGap(19, 19, 19))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelId)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(236, 236, 236)
+                                        .addComponent(jLabelPeriodo))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(252, 252, 252)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jTextFieldPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabelTratamento)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabelRelatorio)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)
+                                .addGap(219, 219, 219)
+                                .addComponent(jLabelMedico)
+                                .addGap(88, 88, 88)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabelConsultorio)
+                                .addGap(94, 94, 94)))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSalvar)
+                .addGap(33, 33, 33)
+                .addComponent(jButtonLimpar)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonAtualizarTabelas)
+                .addGap(387, 387, 387))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelId)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelPeriodo)
-                    .addComponent(jTextFieldPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabelRelatorio)
-                        .addComponent(jLabelTratamento))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonLimpar)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabelId)
+                                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelPeriodo)
+                                    .addComponent(jTextFieldPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabelMedico)
+                                    .addComponent(jLabelConsultorio))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTratamento)
+                            .addComponent(jLabelRelatorio)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonExcluir)
+                        .addGap(286, 286, 286))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButtonLimpar)
+                                .addComponent(jButtonAtualizarTabelas))
+                            .addComponent(jButtonSalvar))
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonExcluir)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -224,38 +440,60 @@ public class JPanelConsulta extends javax.swing.JPanel {
         jTextAreaTratamento.setText("");
         jTextFieldId.setText("");
         jTextFieldPeriodo.setText("");
+        jTableConsultorio.clearSelection();
+        jTableMedico.clearSelection();
+        jTablePaciente.clearSelection();
+        jTableConsulta.clearSelection();
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         Consulta consulta = new Consulta();
+        int linhaP,linhaM,linhaC,id;
         
         consulta.setId(Integer.parseInt(jTextFieldId.getText()));
         consulta.setTratamento(jTextAreaTratamento.getText());
         consulta.setRelatorioPaciente(jTextAreaRelatorio.getText());
         consulta.setPeriodoDeExames(jTextFieldPeriodo.getText());
-        if (consultadao.getById(consulta.getId())==null){
-            consultadao.inserir(consulta);
-        } else {
-            consultadao.editar(consulta);
+        linhaP = jTablePaciente.getSelectedRow();
+        if( linhaP!=-1){
+          id = (int)jTablePaciente.getValueAt(linhaP, 0);
+          consulta.setIdPaciente(id);
         }
-        jButtonLimparActionPerformed(evt);
-        carregarTabela();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        linhaM = jTableMedico.getSelectedRow();
+        if( linhaM!=-1){
+          id = (int)jTableMedico.getValueAt(linhaM, 0);
+          consulta.setIdMedico(id);
+        }
+        linhaC = jTableConsultorio.getSelectedRow();
+        if( linhaC!=-1){
+          id = (int)jTableConsultorio.getValueAt(linhaC, 0);
+          consulta.setIdConsultorio(id);
+        }
+        if(linhaP!=-1 && linhaM!=-1 && linhaC!=-1){
+            if (consultaDAO.getById(consulta.getId())==null){
+                consultaDAO.inserir(consulta);
+            } else {
+                consultaDAO.editar(consulta);
+            }
+            jButtonLimparActionPerformed(evt);   
+        }
+        carregarTabelaConsulta();
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        int[] linhas = jTable.getSelectedRows();
+        int[] linhas = jTableConsulta.getSelectedRows();
         for (int pos: linhas) {
-            int id = (int) jTable.getValueAt(pos, 0);
-            consultadao.remover(id);
+            int id = (int) jTableConsulta.getValueAt(pos, 0);
+            consultaDAO.remover(id);
         }
-        carregarTabela();
+        carregarTabelaConsulta();
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        int linha= jTable.getSelectedRow();
+        int linha= jTableConsulta.getSelectedRow();
         if(linha!= -1){
-            int id =(int) jTable.getValueAt(linha, 0);
-            Consulta consulta = consultadao.getById(id);
+            int id =(int) jTableConsulta.getValueAt(linha, 0);
+            Consulta consulta = consultaDAO.getById(id);
             jTextAreaRelatorio.setText(consulta.getRelatorioPaciente());
             jTextAreaTratamento.setText(consulta.getTratamento());
             jTextFieldId.setText(consulta.getId()+"");
@@ -268,20 +506,37 @@ public class JPanelConsulta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldIdActionPerformed
 
+    private void jButtonAtualizarTabelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarTabelasActionPerformed
+        carregarTabelaConsulta();
+        carregarTabelaConsultorio();
+        carregarTabelaMedico();
+        carregarTabelaPaciente();
+    }//GEN-LAST:event_jButtonAtualizarTabelasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonAtualizarTabelas;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonLimpar;
+    private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelConsultorio;
     private javax.swing.JLabel jLabelId;
+    private javax.swing.JLabel jLabelMedico;
     private javax.swing.JLabel jLabelPeriodo;
     private javax.swing.JLabel jLabelRelatorio;
     private javax.swing.JLabel jLabelTratamento;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JTable jTableConsulta;
+    private javax.swing.JTable jTableConsultorio;
+    private javax.swing.JTable jTableMedico;
+    private javax.swing.JTable jTablePaciente;
     private javax.swing.JTextArea jTextAreaRelatorio;
     private javax.swing.JTextArea jTextAreaTratamento;
     private javax.swing.JTextField jTextFieldId;
