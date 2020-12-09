@@ -38,12 +38,12 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         jMenuItemLeitos = new javax.swing.JMenuItem();
         jMenuItemInternacao = new javax.swing.JMenuItem();
         jMenuItemConsulta = new javax.swing.JMenuItem();
+        jMenuItemAmbulatorio = new javax.swing.JMenuItem();
+        jMenuItemObservacao = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(1300, 700));
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
@@ -52,7 +52,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
 
         jMenu.setText("File");
 
-        jMenuItemPaciente.setText("Paciente");
+        jMenuItemPaciente.setText("Pacientes");
         jMenuItemPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemPacienteActionPerformed(evt);
@@ -100,7 +100,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         });
         jMenu.add(jMenuItemLeitos);
 
-        jMenuItemInternacao.setText("Internação");
+        jMenuItemInternacao.setText("Internações");
         jMenuItemInternacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemInternacaoActionPerformed(evt);
@@ -108,13 +108,29 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         });
         jMenu.add(jMenuItemInternacao);
 
-        jMenuItemConsulta.setText("Consulta");
+        jMenuItemConsulta.setText("Consultas");
         jMenuItemConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemConsultaActionPerformed(evt);
             }
         });
         jMenu.add(jMenuItemConsulta);
+
+        jMenuItemAmbulatorio.setText("Ambulatórios");
+        jMenuItemAmbulatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAmbulatorioActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemAmbulatorio);
+
+        jMenuItemObservacao.setText("Observações");
+        jMenuItemObservacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemObservacaoActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemObservacao);
 
         jMenuBar1.add(jMenu);
 
@@ -179,6 +195,20 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         conteudoJPanel.setVisible(true);
     }//GEN-LAST:event_jMenuItemPacienteActionPerformed
 
+    private void jMenuItemAmbulatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAmbulatorioActionPerformed
+        conteudoJPanel.removeAll();
+        conteudoJPanel.add(new JPanelAmbulatorio());
+        conteudoJPanel.setVisible(false);
+        conteudoJPanel.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAmbulatorioActionPerformed
+
+    private void jMenuItemObservacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemObservacaoActionPerformed
+        conteudoJPanel.removeAll();
+        conteudoJPanel.add(new JPanelObservacao());
+        conteudoJPanel.setVisible(false);
+        conteudoJPanel.setVisible(true);
+    }//GEN-LAST:event_jMenuItemObservacaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,6 +248,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel conteudoJPanel;
     private javax.swing.JMenu jMenu;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAmbulatorio;
     private javax.swing.JMenuItem jMenuItemConsulta;
     private javax.swing.JMenuItem jMenuItemConsultorio;
     private javax.swing.JMenuItem jMenuItemEnfermeiros;
@@ -225,6 +256,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemInternacao;
     private javax.swing.JMenuItem jMenuItemLeitos;
     private javax.swing.JMenuItem jMenuItemMedicos;
+    private javax.swing.JMenuItem jMenuItemObservacao;
     private javax.swing.JMenuItem jMenuItemPaciente;
     // End of variables declaration//GEN-END:variables
 }
