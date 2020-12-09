@@ -1,4 +1,4 @@
-package hospital.management.system.persistencia.postgresql;
+package hospital.management.system.persistencia.mysql;
 
 import hospital.management.system.entidades.Observacao;
 import hospital.management.system.persistencia.ObservacaoDAO;
@@ -12,15 +12,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
+public class ObservacaoDAOMySQL implements ObservacaoDAO {
     
     private Connection conexao;
     
     private void abrirConexao() {
         try {
-            conexao = DriverManager.getConnection("jdbc:postgresql://", "postgre", "");
+            String className = "com.mysql.cj.jdbc.Driver";
+            Class.forName(className);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ObservacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","root");
         } catch (SQLException ex) {
-            Logger.getLogger(ObservacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ObservacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -28,7 +34,7 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
         try {
             conexao.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ObservacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ObservacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -37,7 +43,7 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "INSERT INTO observacao (medicacao, dataEntrada, dataSaida, horarioEntrada, horario_de_saida, idAmbulatorio, idPaciente) VALUES ('?', '?', '?', '?', '?', ?, ?);";
+            String sql = "INSERT INTO observacao (medicacao, dataEntrada, dataSaida, horarioEntrada, horarioSaida, idAmbulatorio, idPaciente) VALUES (?, ?, ?, ?, ?, ?, ?);";
             
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
@@ -54,7 +60,7 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ObservacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ObservacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -63,7 +69,7 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "UPDATE observacao SET medicacao = ?, dataEntrada = ?, dataSaida= ?, horarioEntrada= ?, horario_de_saida= ?, idAmbulatorio= ?, idPaciente= ?  WHERE  id = ?;";
+            String sql = "UPDATE observacao SET medicacao = ?, dataEntrada = ?, dataSaida= ?, horarioEntrada= ?, horarioSaida= ?, idAmbulatorio= ?, idPaciente= ?  WHERE  id = ?";
             PreparedStatement pstm = conexao.prepareStatement(sql);
             
             pstm.setString(1, observacao.getMedicacao());
@@ -79,7 +85,7 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
             
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ObservacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ObservacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -88,7 +94,7 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "DELETE FROM observacao WHERE id = " + id + ";";
+            String sql = "DELETE FROM observacao WHERE id = " + id;
             
             conexao.createStatement().executeUpdate(sql);
             
@@ -96,7 +102,7 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
             
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(ObservacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ObservacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -107,7 +113,7 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM observacao WHERE id = " + id + ";";
+            String sql = "SELECT * FROM observacao WHERE id = " + id;
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
@@ -118,14 +124,14 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
                 observacao.setDataEntrada(rs.getString("dataEntrada"));
                 observacao.setDataSaida(rs.getString("dataSaida"));
                 observacao.setHorarioEntrada(rs.getString("horarioEntrada"));
-                observacao.setHorarioSaida(rs.getString("horario_de_saida"));
+                observacao.setHorarioSaida(rs.getString("horarioSaida"));
                 observacao.setIdAmbulatorio(rs.getInt("idAmbulatorio"));
                 observacao.setIdPaciente(rs.getInt("idPaciente"));
             }
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ObservacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ObservacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return observacao;
     }
@@ -136,17 +142,18 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
         try {
             abrirConexao();
             
-            String sql = "SELECT * FROM observacao;";
+            String sql = "SELECT * FROM observacao";
             
             ResultSet rs = conexao.createStatement().executeQuery(sql);
             
-            if (rs.next()) {
+            while (rs.next()) {
                 Observacao observacao = new Observacao();
+                observacao.setId(rs.getInt("id"));
                 observacao.setMedicacao(rs.getString("medicacao"));
                 observacao.setDataEntrada(rs.getString("dataEntrada"));
                 observacao.setDataSaida(rs.getString("dataSaida"));
                 observacao.setHorarioEntrada(rs.getString("horarioEntrada"));
-                observacao.setHorarioSaida(rs.getString("horario_de_saida"));
+                observacao.setHorarioSaida(rs.getString("horarioSaida"));
                 observacao.setIdAmbulatorio(rs.getInt("idAmbulatorio"));
                 observacao.setIdPaciente(rs.getInt("idPaciente"));
                 lista.add(observacao);
@@ -154,7 +161,7 @@ public class ObservacaoDAOPostgreSQL implements ObservacaoDAO {
             rs.close();
             fecharConexao();
         } catch (SQLException ex) {
-            Logger.getLogger(ObservacaoDAOPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ObservacaoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }

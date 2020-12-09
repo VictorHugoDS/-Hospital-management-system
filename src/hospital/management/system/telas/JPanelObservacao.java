@@ -423,7 +423,13 @@ public class JPanelObservacao extends javax.swing.JPanel {
           observacao.setIdAmbulatorio(id);
         }
         
-        observacao.setId(Integer.parseInt(jTextFieldId.getText()));
+        int idObs = 0;
+        try {
+            idObs = Integer.parseInt(jTextFieldId.getText());
+        } catch(NumberFormatException ex) {
+            idObs = 0;
+        }
+        observacao.setId(idObs);
         observacao.setDataEntrada(jTextFieldDataEntrada.getText());
         observacao.setHorarioEntrada(jTextFieldHorarioEntrada.getText());
         observacao.setDataSaida(jTextFieldDataSaida.getText());

@@ -16,6 +16,9 @@ public class PrincipalJFrame extends javax.swing.JFrame {
      */
     public PrincipalJFrame() {
         initComponents();
+        conteudoJPanel.add(new JPanelConsultorio());
+        conteudoJPanel.setVisible(false);
+        conteudoJPanel.setVisible(true);
     }
 
     /**

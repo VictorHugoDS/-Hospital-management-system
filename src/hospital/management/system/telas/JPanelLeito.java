@@ -8,6 +8,7 @@ package hospital.management.system.telas;
 import hospital.management.system.entidades.Leito;
 import hospital.management.system.persistencia.LeitoDAO;
 import hospital.management.system.persistencia.arquivo.LeitoDAOImplArq;
+import hospital.management.system.utils.DAOFactory;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author rener
  */
 public class JPanelLeito extends javax.swing.JPanel {
-    private LeitoDAO leitodao = new LeitoDAOImplArq();
+    private LeitoDAO leitodao = DAOFactory.createLeitoDAO();
     /**
      * Creates new form JPanelLeito
      */
@@ -124,6 +125,7 @@ public class JPanelLeito extends javax.swing.JPanel {
 
         jLabelId.setText("Id:");
 
+        jTextFieldId.setEditable(false);
         jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdActionPerformed(evt);
@@ -215,7 +217,13 @@ public class JPanelLeito extends javax.swing.JPanel {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         Leito leito = new Leito();
         
-        leito.setId(Integer.parseInt(jTextFieldId.getText()));
+        int id = 0;
+        try {
+        id = Integer.parseInt(jTextFieldId.getText());
+        } catch(NumberFormatException ex) {
+            id = 0;
+        }
+        leito.setId(id);
         leito.setNumero(Integer.parseInt(jTextFieldNumero.getText()));
         leito.setTipo(jTextFieldTipo.getText());
         if(leitodao.getById(leito.getId())==null){

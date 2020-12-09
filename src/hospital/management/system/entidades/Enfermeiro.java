@@ -6,6 +6,22 @@ public class Enfermeiro extends FuncionarioHospital{
     private int idLeito;
     private int idAmbulatorio;
 
+    public int getIdLeito() {
+        return idLeito;
+    }
+
+    public void setIdLeito(int idLeito) {
+        this.idLeito = idLeito;
+    }
+
+    public int getIdAmbulatorio() {
+        return idAmbulatorio;
+    }
+
+    public void setIdAmbulatorio(int idAmbulatorio) {
+        this.idAmbulatorio = idAmbulatorio;
+    }
+
     public int getRegistro() {
         return registro;
     }

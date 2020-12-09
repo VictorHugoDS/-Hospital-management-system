@@ -142,6 +142,8 @@ public class JPanelInternacao extends javax.swing.JPanel {
 
         jLabelMedicacao.setText("Medicação:");
 
+        jTextFieldId.setEditable(false);
+
         jTextFieldData_de_entrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldData_de_entradaActionPerformed(evt);
@@ -421,7 +423,13 @@ public class JPanelInternacao extends javax.swing.JPanel {
           internacao.setIdLeito(id);
         }
         
-        internacao.setId(Integer.parseInt(jTextFieldId.getText()));
+        int idInt = 0;
+        try {
+        idInt = Integer.parseInt(jTextFieldId.getText());
+        } catch(NumberFormatException ex) {
+            idInt = 0;
+        }
+        internacao.setId(idInt);
         internacao.setDataEntrada(jTextFieldData_de_entrada.getText());
         internacao.setHorarioEntrada(jTextFieldHorario_de_entrada.getText());
         internacao.setDataSaida(jTextFieldData_de_saida.getText());
