@@ -55,7 +55,6 @@ public class ObservacaoDAOMySQL implements ObservacaoDAO {
             pstm.setInt(6, observacao.getIdAmbulatorio());
             pstm.setInt(7, observacao.getIdPaciente());
             
-            
             pstm.execute();
             
             fecharConexao();

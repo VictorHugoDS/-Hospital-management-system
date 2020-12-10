@@ -1,4 +1,3 @@
-
 package hospital.management.system.persistencia.arquivo;
 
 import hospital.management.system.entidades.Ambulatorio;

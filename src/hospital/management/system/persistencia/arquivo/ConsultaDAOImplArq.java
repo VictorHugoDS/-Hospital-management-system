@@ -1,4 +1,5 @@
 package hospital.management.system.persistencia.arquivo;
+
 import hospital.management.system.entidades.Consulta;
 import hospital.management.system.persistencia.ConsultaDAO;
 import java.io.FileInputStream;

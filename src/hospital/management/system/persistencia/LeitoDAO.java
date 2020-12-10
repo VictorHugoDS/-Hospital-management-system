@@ -1,4 +1,3 @@
-
 package hospital.management.system.persistencia;
 
 import hospital.management.system.entidades.Leito;
