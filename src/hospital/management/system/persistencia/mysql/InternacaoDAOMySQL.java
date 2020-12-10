@@ -78,6 +78,7 @@ public class InternacaoDAOMySQL implements InternacaoDAO {
             pstm.setString(5, internacao.getHorarioSaida());
             pstm.setInt(6, internacao.getIdLeito());
             pstm.setInt(7, internacao.getIdPaciente());
+            pstm.setInt(8, internacao.getId());
             
             pstm.execute();
             

@@ -11,6 +11,7 @@ public class JPanelAmbulatorio extends javax.swing.JPanel {
 
     public JPanelAmbulatorio() {
         initComponents();
+        carregarTabela();
     }
     
     public void carregarTabela() {
