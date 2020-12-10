@@ -17,7 +17,7 @@ public class JPanelConsultorio extends javax.swing.JPanel {
     public void carregarTabela() {
         List<Consultorio> consultorios = consultorioDAO.listar();
         DefaultTableModel modeloTabela = (DefaultTableModel) jTable.getModel();
-        //Remocao das linhas atuais da tabela para atualizacao
+
         int qntdLinhas = modeloTabela.getRowCount();
         for (int i = 0; i < qntdLinhas; i++) {
             modeloTabela.removeRow(0);
@@ -172,7 +172,7 @@ public class JPanelConsultorio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jTextFieldIdActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed

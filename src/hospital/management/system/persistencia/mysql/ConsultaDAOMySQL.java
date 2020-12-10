@@ -1,4 +1,3 @@
-
 package hospital.management.system.persistencia.mysql;
 
 import hospital.management.system.entidades.Consulta;

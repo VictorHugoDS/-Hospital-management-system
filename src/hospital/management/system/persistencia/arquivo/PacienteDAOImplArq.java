@@ -2,7 +2,6 @@ package hospital.management.system.persistencia.arquivo;
 
 import hospital.management.system.persistencia.PacienteDAO;
 import hospital.management.system.entidades.Paciente;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.io.ObjectInputStream;
@@ -13,6 +12,7 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 public class PacienteDAOImplArq implements PacienteDAO {
     private final String nomeArq = "pacientes.dat";
     private List<Paciente> pacientes = new ArrayList<Paciente>();

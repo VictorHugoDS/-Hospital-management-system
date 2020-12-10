@@ -2,7 +2,6 @@ package hospital.management.system.persistencia.arquivo;
 
 import hospital.management.system.persistencia.FuncionarioHospitalDAO;
 import hospital.management.system.entidades.FuncionarioHospital;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.io.ObjectInputStream;
