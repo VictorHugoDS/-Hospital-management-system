@@ -1,4 +1,3 @@
-
 package hospital.management.system.persistencia.mysql;
 
 import hospital.management.system.entidades.Ambulatorio;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 public class AmbulatorioDAOMySQL implements AmbulatorioDAO{
     

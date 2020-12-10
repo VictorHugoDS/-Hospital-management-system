@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class LeitoDAOImplArq implements LeitoDAO{
     private final String filename = "Leito.dat";
     private List<Leito> leitos = new ArrayList<Leito>();
