@@ -4,13 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/telas/JPanelEnfermeiro.java</file>
-            <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/entidades/Observacao.java</file>
+            <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/telas/JPanelPaciente.java</file>
+            <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/telas/JPanelFuncionarioHospital.java</file>
             <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/telas/JPanelConsulta.java</file>
-            <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/persistencia/postgresql/ConsultaDAOPostgreSQL.java</file>
-            <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/persistencia/postgresql/AmbulatorioDAOPostgreSQL.java</file>
+            <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/telas/JPanelLeito.java</file>
             <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/telas/PrincipalJFrame.java</file>
             <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/telas/JPanelObservacao.java</file>
+            <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/telas/JPanelInternacao.java</file>
+            <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/telas/JPanelMedico.java</file>
             <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/telas/JPanelConsultorio.java</file>
+            <file>file:/C:/Users/rener/Hospital-management-system/src/hospital/management/system/telas/JPanelAmbulatorio.java</file>
         </group>
     </open-files>
 </project-private>
