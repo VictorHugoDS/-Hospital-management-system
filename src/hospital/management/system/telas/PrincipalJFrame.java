@@ -17,19 +17,20 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         jMenuItemPaciente = new javax.swing.JMenuItem();
+        jMenuItemConsulta = new javax.swing.JMenuItem();
+        jMenuItemMedicos = new javax.swing.JMenuItem();
+        jMenuItemEnfermeiros = new javax.swing.JMenuItem();
+        jMenuItemInternacao = new javax.swing.JMenuItem();
+        jMenuItemLeitos = new javax.swing.JMenuItem();
+        jMenuItemObservacao = new javax.swing.JMenuItem();
+        jMenuItemAmbulatorio = new javax.swing.JMenuItem();
         jMenuItemConsultorio = new javax.swing.JMenuItem();
         jMenuItemFuncionarioHospital = new javax.swing.JMenuItem();
-        jMenuItemEnfermeiros = new javax.swing.JMenuItem();
-        jMenuItemMedicos = new javax.swing.JMenuItem();
-        jMenuItemLeitos = new javax.swing.JMenuItem();
-        jMenuItemInternacao = new javax.swing.JMenuItem();
-        jMenuItemConsulta = new javax.swing.JMenuItem();
-        jMenuItemAmbulatorio = new javax.swing.JMenuItem();
-        jMenuItemObservacao = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(1300, 700));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
@@ -46,6 +47,62 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         });
         jMenu.add(jMenuItemPaciente);
 
+        jMenuItemConsulta.setText("Consultas");
+        jMenuItemConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConsultaActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemConsulta);
+
+        jMenuItemMedicos.setText("Medicos");
+        jMenuItemMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMedicosActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemMedicos);
+
+        jMenuItemEnfermeiros.setText("Enfermeiros");
+        jMenuItemEnfermeiros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEnfermeirosActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemEnfermeiros);
+
+        jMenuItemInternacao.setText("Internações");
+        jMenuItemInternacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemInternacaoActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemInternacao);
+
+        jMenuItemLeitos.setText("Leitos");
+        jMenuItemLeitos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLeitosActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemLeitos);
+
+        jMenuItemObservacao.setText("Observações");
+        jMenuItemObservacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemObservacaoActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemObservacao);
+
+        jMenuItemAmbulatorio.setText("Ambulatórios");
+        jMenuItemAmbulatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAmbulatorioActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemAmbulatorio);
+
         jMenuItemConsultorio.setText("Consultorios");
         jMenuItemConsultorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,62 +118,6 @@ public class PrincipalJFrame extends javax.swing.JFrame {
             }
         });
         jMenu.add(jMenuItemFuncionarioHospital);
-
-        jMenuItemEnfermeiros.setText("Enfermeiros");
-        jMenuItemEnfermeiros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemEnfermeirosActionPerformed(evt);
-            }
-        });
-        jMenu.add(jMenuItemEnfermeiros);
-
-        jMenuItemMedicos.setText("Medicos");
-        jMenuItemMedicos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemMedicosActionPerformed(evt);
-            }
-        });
-        jMenu.add(jMenuItemMedicos);
-
-        jMenuItemLeitos.setText("Leitos");
-        jMenuItemLeitos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemLeitosActionPerformed(evt);
-            }
-        });
-        jMenu.add(jMenuItemLeitos);
-
-        jMenuItemInternacao.setText("Internações");
-        jMenuItemInternacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemInternacaoActionPerformed(evt);
-            }
-        });
-        jMenu.add(jMenuItemInternacao);
-
-        jMenuItemConsulta.setText("Consultas");
-        jMenuItemConsulta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemConsultaActionPerformed(evt);
-            }
-        });
-        jMenu.add(jMenuItemConsulta);
-
-        jMenuItemAmbulatorio.setText("Ambulatórios");
-        jMenuItemAmbulatorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemAmbulatorioActionPerformed(evt);
-            }
-        });
-        jMenu.add(jMenuItemAmbulatorio);
-
-        jMenuItemObservacao.setText("Observações");
-        jMenuItemObservacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemObservacaoActionPerformed(evt);
-            }
-        });
-        jMenu.add(jMenuItemObservacao);
 
         jMenuBar1.add(jMenu);
 
