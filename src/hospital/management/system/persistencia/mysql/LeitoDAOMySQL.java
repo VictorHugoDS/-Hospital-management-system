@@ -64,7 +64,7 @@ public class LeitoDAOMySQL implements LeitoDAO{
             
             pstm.setInt(1, leito.getNumero());
             pstm.setString(2, leito.getTipo());
-            pstm.setInt(4, leito.getId());
+            pstm.setInt(3, leito.getId());
             
             pstm.execute();
             

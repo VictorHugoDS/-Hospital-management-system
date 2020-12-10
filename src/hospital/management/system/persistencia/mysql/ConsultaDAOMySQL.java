@@ -77,6 +77,7 @@ public class ConsultaDAOMySQL implements ConsultaDAO {
             pstm.setInt(4, consulta.getIdMedico());
             pstm.setInt(5, consulta.getIdPaciente());
             pstm.setInt(6, consulta.getIdConsultorio());
+            pstm.setInt(7, consulta.getId());
             
             pstm.execute();
             
