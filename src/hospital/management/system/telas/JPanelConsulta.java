@@ -13,10 +13,10 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class JPanelConsulta extends javax.swing.JPanel {
-    ConsultaDAO consultaDAO = DAOFactory.createConsultaDAO();
-    PacienteDAO pacienteDAO = DAOFactory.createPacienteDAO();
-    MedicoDAO medicoDAO = DAOFactory.createMedicoDAO();
-    ConsultorioDAO consultorioDAO = DAOFactory.createConsultorioDAO();
+    private ConsultaDAO consultaDAO = DAOFactory.createConsultaDAO();
+    private PacienteDAO pacienteDAO = DAOFactory.createPacienteDAO();
+    private MedicoDAO medicoDAO = DAOFactory.createMedicoDAO();
+    private ConsultorioDAO consultorioDAO = DAOFactory.createConsultorioDAO();
 
     public JPanelConsulta() {
         initComponents();
@@ -52,7 +52,7 @@ public class JPanelConsulta extends javax.swing.JPanel {
     }
         
     public void carregarTabelaPaciente() {
-        List<Paciente> medicos = pacienteDAO.listar();
+        List<Paciente> pacientes = pacienteDAO.listar();
         DefaultTableModel modeloTabela = (DefaultTableModel) jTablePaciente.getModel();
         int qntLinhas = modeloTabela.getRowCount();
         
@@ -61,10 +61,10 @@ public class JPanelConsulta extends javax.swing.JPanel {
             modeloTabela.removeRow(0);
         }
         
-        for (Paciente medico: medicos) {
+        for (Paciente paciente: pacientes) {
             Object[] linha = new Object[2];
-            linha[0] = medico.getId();
-            linha[1] = medico.getNome();
+            linha[0] = paciente.getId();
+            linha[1] = paciente.getNome();
             
             modeloTabela.addRow(linha);
         }
@@ -493,6 +493,32 @@ public class JPanelConsulta extends javax.swing.JPanel {
             jTextAreaTratamento.setText(consulta.getTratamento());
             jTextFieldId.setText(consulta.getId()+"");
             jTextFieldPeriodo.setText(consulta.getPeriodoDeExames()); 
+            for(int i=0;i<jTablePaciente.getRowCount();i++){ 
+                int idD = (int)jTablePaciente.getValueAt(i, 0);
+                if(consulta.getIdPaciente()==idD){
+                    linha = i; 
+                    break;
+                }
+            }
+            jTablePaciente.setRowSelectionInterval(linha, linha);
+            
+            for(int i=0;i<jTableMedico.getRowCount();i++){ 
+                int idD = (int)jTableMedico.getValueAt(i, 0);
+                if(consulta.getIdMedico()==idD){
+                    linha = i; 
+                    break;
+                }
+            }
+            jTableMedico.setRowSelectionInterval(linha, linha);
+            
+            for(int i=0;i<jTableConsultorio.getRowCount();i++){ 
+                int idD = (int)jTableConsultorio.getValueAt(i, 0);
+                if(consulta.getIdConsultorio()==idD){
+                    linha = i; 
+                    break;
+                }
+            }
+            jTableConsultorio.setRowSelectionInterval(linha, linha);
         }
         
     }//GEN-LAST:event_jButtonEditarActionPerformed

@@ -449,13 +449,31 @@ public class JPanelObservacao extends javax.swing.JPanel {
         int linha = jTableObservacao.getSelectedRow();
         if (linha!=-1){
             int id = (int)jTableObservacao.getValueAt(linha, 0);
-            Observacao leito = observacaoDAO.getById(id);
-            jTextFieldId.setText(leito.getId()+"");
-            jTextFieldDataEntrada.setText(leito.getDataEntrada());
-            jTextFieldHorarioEntrada.setText(leito.getHorarioEntrada());
-            jTextFieldDataSaida.setText(leito.getDataSaida());
-            jTextFieldHorarioSaida.setText(leito.getHorarioSaida());
-            jTextAreaMedicacao.setText(leito.getMedicacao());
+            Observacao observacao = observacaoDAO.getById(id);
+            jTextFieldId.setText(observacao.getId()+"");
+            jTextFieldDataEntrada.setText(observacao.getDataEntrada());
+            jTextFieldHorarioEntrada.setText(observacao.getHorarioEntrada());
+            jTextFieldDataSaida.setText(observacao.getDataSaida());
+            jTextFieldHorarioSaida.setText(observacao.getHorarioSaida());
+            jTextAreaMedicacao.setText(observacao.getMedicacao());
+            
+            for(int i=0;i<jTablePaciente.getRowCount();i++){ 
+                int idD = (int)jTablePaciente.getValueAt(i, 0);
+                if(observacao.getIdPaciente()==idD){
+                    linha = i; 
+                    break;
+                }
+            }
+            jTablePaciente.setRowSelectionInterval(linha, linha);
+            
+            for(int i=0;i<jTableAmbulatorio.getRowCount();i++){ 
+                int idD = (int)jTableAmbulatorio.getValueAt(i, 0);
+                if(observacao.getIdAmbulatorio()==idD){
+                    linha = i; 
+                    break;
+                }
+            }
+            jTableAmbulatorio.setRowSelectionInterval(linha, linha);
         } 
     }//GEN-LAST:event_jButtonEditarActionPerformed
 

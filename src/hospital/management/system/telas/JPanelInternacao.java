@@ -66,7 +66,7 @@ public class JPanelInternacao extends javax.swing.JPanel {
         }
     }
      private void carregarTabelaLeito(){
-        List<Leito> leitos = leitoDAO.listar();
+        List<Leito> internacaos = leitoDAO.listar();
         DefaultTableModel modeloTabela = (DefaultTableModel) jTableLeito.getModel();
         int qntLinhas = modeloTabela.getRowCount();
         
@@ -74,10 +74,10 @@ public class JPanelInternacao extends javax.swing.JPanel {
         for (int i = 0; i < qntLinhas; i++) {
             modeloTabela.removeRow(0);
         }
-        for (Leito leito: leitos){
+        for (Leito internacao: internacaos){
           Object[] linha = new Object[2];
-          linha[0]= leito.getId();
-          linha[1]= leito.getNumero();
+          linha[0]= internacao.getId();
+          linha[1]= internacao.getNumero();
           
           modeloTabela.addRow(linha);
         }
@@ -113,6 +113,7 @@ public class JPanelInternacao extends javax.swing.JPanel {
         jLabelLeito = new javax.swing.JLabel();
         jLabelPaciente = new javax.swing.JLabel();
         jButtonAtualizar = new javax.swing.JButton();
+        jLabelInternacao = new javax.swing.JLabel();
 
         jLabelId.setText("Id:");
 
@@ -271,54 +272,14 @@ public class JPanelInternacao extends javax.swing.JPanel {
             }
         });
 
+        jLabelInternacao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelInternacao.setText("Internações");
+        jLabelInternacao.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelHorario_de_entradaa)
-                                .addGap(6, 6, 6)
-                                .addComponent(jTextFieldHorario_de_entrada))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldData_de_entrada, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelData_de_saida)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldData_de_saida, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelHorario_de_saida)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldHorario_de_saida, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelMedicacao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(jLabelPaciente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelLeito)
-                        .addGap(143, 143, 143))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -326,19 +287,71 @@ public class JPanelInternacao extends javax.swing.JPanel {
                     .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelId)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelHorario_de_entradaa)
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jTextFieldHorario_de_entrada))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextFieldData_de_entrada, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelData_de_saida)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextFieldData_de_saida, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelHorario_de_saida)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldHorario_de_saida, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelMedicacao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(167, 167, 167)
+                                .addComponent(jLabelPaciente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelLeito)
+                                .addGap(124, 124, 124))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonSalvar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonLimpar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonAtualizar)
+                        .addGap(383, 383, 383)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSalvar)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonLimpar)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonAtualizar)
-                .addGap(401, 401, 401))
+                .addContainerGap()
+                .addComponent(jLabelInternacao)
+                .addGap(540, 540, 540))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(39, 39, 39)
+                .addComponent(jLabelInternacao)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelId)
                     .addComponent(jLabel2)
@@ -346,8 +359,8 @@ public class JPanelInternacao extends javax.swing.JPanel {
                     .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldData_de_entrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldData_de_saida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelLeito)
-                    .addComponent(jLabelPaciente))
+                    .addComponent(jLabelPaciente)
+                    .addComponent(jLabelLeito))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -362,21 +375,19 @@ public class JPanelInternacao extends javax.swing.JPanel {
                         .addComponent(jTextFieldHorario_de_entrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextFieldHorario_de_saida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvar)
                     .addComponent(jButtonLimpar)
                     .addComponent(jButtonAtualizar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonEditar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonExcluir)
-                        .addGap(231, 231, 231))))
+                        .addComponent(jButtonExcluir))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -441,14 +452,32 @@ public class JPanelInternacao extends javax.swing.JPanel {
         int linha = jTableInternacao.getSelectedRow();
         if (linha!=-1){
             int id = (int)jTableInternacao.getValueAt(linha, 0);
-            Internacao leito = internacaoDAO.getById(id);
+            Internacao internacao = internacaoDAO.getById(id);
             
-            jTextFieldId.setText(leito.getId()+"");
-            jTextFieldData_de_entrada.setText(leito.getDataEntrada());
-            jTextFieldHorario_de_entrada.setText(leito.getHorarioEntrada());
-            jTextFieldData_de_saida.setText(leito.getDataSaida());
-            jTextFieldHorario_de_saida.setText(leito.getHorarioSaida());
-            jTextAreaMedicacao.setText(leito.getMedicacao());
+            jTextFieldId.setText(internacao.getId()+"");
+            jTextFieldData_de_entrada.setText(internacao.getDataEntrada());
+            jTextFieldHorario_de_entrada.setText(internacao.getHorarioEntrada());
+            jTextFieldData_de_saida.setText(internacao.getDataSaida());
+            jTextFieldHorario_de_saida.setText(internacao.getHorarioSaida());
+            jTextAreaMedicacao.setText(internacao.getMedicacao());
+            
+            for(int i=0;i<jTablePaciente.getRowCount();i++){ 
+                int idD = (int)jTablePaciente.getValueAt(i, 0);
+                if(internacao.getIdPaciente()==idD){
+                    linha = i; 
+                    break;
+                }
+            }
+            jTablePaciente.setRowSelectionInterval(linha, linha);
+            
+            for(int i=0;i<jTableLeito.getRowCount();i++){ 
+                int idD = (int)jTableLeito.getValueAt(i, 0);
+                if(internacao.getIdLeito()==idD){
+                    linha = i; 
+                    break;
+                }
+            }
+            jTableLeito.setRowSelectionInterval(linha, linha);
         } 
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
@@ -483,6 +512,7 @@ public class JPanelInternacao extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelHorario_de_entradaa;
     private javax.swing.JLabel jLabelHorario_de_saida;
     private javax.swing.JLabel jLabelId;
+    private javax.swing.JLabel jLabelInternacao;
     private javax.swing.JLabel jLabelLeito;
     private javax.swing.JLabel jLabelMedicacao;
     private javax.swing.JLabel jLabelPaciente;
